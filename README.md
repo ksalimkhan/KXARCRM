@@ -1,7 +1,7 @@
 # KXAR Members:
 Xavier Ramos\
-Russell de Vries
-Kousha Salimkhan
+Russell de Vries \
+Kousha Salimkhan \
 Alex Simonyan
 
 # KXARCRM
