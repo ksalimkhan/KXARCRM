@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Dashboard Page",
+  title: "CRM Dashboard",
+  description: "CRM Dashboard",
 };
 
 export default function DashboardLayout({

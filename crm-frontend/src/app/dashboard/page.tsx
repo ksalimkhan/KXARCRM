@@ -1,21 +1,42 @@
-import React from "react";
-import Link from "next/link";
+import client from '../../lib/db';
+import Link from 'next/link';
 
-const dashboard: React.FC = () => {
-	return (
-		<div>
-			{/* Dashboard content goes here */}
-            <h1>WELCOME TO THE DASHBOARD</h1>
+interface Customer {
+  customer_id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  address: string;
+  last_contacted: string;
+  notes: string;
+  status: string;
+}
 
-			<Link
-			className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-			href="/"
-			rel="noopener noreferrer"
-			>
-				Back
-			</Link>
-		</div>
-	);
-};
+export default async function Home() {
+  let customers: Customer[] = [];
+  try {
+    const result = await client.query('SELECT * FROM customers');
+    customers = result.rows;
+  } catch (error) {
+    console.error('Failed to fetch customers:', error);
+  }
 
-export default dashboard;
+  return (
+    <div>
+      <h1>Customers</h1>
+      <ul>
+        {customers.map((customer) => (
+          <li key={customer.customer_id}>ID: {customer.customer_id}   ||
+          NAME: {customer.first_name} {customer.last_name}    ||
+          EMAIL: {customer.email}   ||
+          PHONE NUMBER: {customer.phone_number}  || 
+          ADDRESS: {customer.address}   ||
+          LAST CONTACTED: {customer.last_contacted}   ||
+          NOTES: {customer.notes}   ||
+          STATUS: {customer.status}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
