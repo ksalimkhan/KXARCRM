@@ -21,7 +21,7 @@ export default function Home() {
             <input type="text" id="username" name="username" placeholder="username"></input>
           </li>
           <li className="tracking-[-.01em]">
-            <input type="text" id="username" name="username" placeholder="password"></input>
+            <input type="password" id="password" name="password" placeholder="password"></input>
           </li>
         </ul>
 

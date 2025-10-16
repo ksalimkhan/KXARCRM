@@ -5,7 +5,7 @@ interface Customer {
   customer_id: number;
   first_name: string;
   last_name: string;
-  email: string;
+  email_address: string;
   phone_number: string;
   address: string;
   last_contacted: string;
@@ -29,7 +29,7 @@ export default async function Home() {
         {customers.map((customer) => (
           <li key={customer.customer_id}>ID: {customer.customer_id}   ||
           NAME: {customer.first_name} {customer.last_name}    ||
-          EMAIL: {customer.email}   ||
+          EMAIL: {customer.email_address}   ||
           PHONE NUMBER: {customer.phone_number}  || 
           ADDRESS: {customer.address}   ||
           LAST CONTACTED: {customer.last_contacted}   ||
