@@ -24,3 +24,11 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+h1 {
+  padding: 1rem;
+}
+
+Link {
+  padding: 1rem;
+}

@@ -1,7 +1,8 @@
-import client from '../lib/db';
+import client from '../../lib/db';
+import Link from 'next/link';
 
 interface Customer {
-  customer_id: number;
+  id: number;
   first_name: string;
   last_name: string;
   email_address: string;
@@ -14,7 +15,6 @@ interface Customer {
 
 export default async function Home() {
   let customers: Customer[] = [];
-
   try {
     const result = await client.query('SELECT * FROM customers');
     customers = result.rows;
@@ -27,7 +27,7 @@ export default async function Home() {
       <h1>Customers</h1>
       <ul>
         {customers.map((customer) => (
-          <li key={customer.customer_id}>ID: {customer.customer_id}   ||
+          <li key={customer.id}>ID: {customer.id}   ||
           NAME: {customer.first_name} {customer.last_name}    ||
           EMAIL: {customer.email_address}   ||
           PHONE NUMBER: {customer.phone_number}  || 
