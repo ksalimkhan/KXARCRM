@@ -1,5 +1,5 @@
 import client from '../../lib/db';
-import Link from 'next/link';
+import AddEntry from './addEntry'
 
 interface Customer {
   id: number;
@@ -12,6 +12,7 @@ interface Customer {
   notes: string;
   status: string;
 }
+
 
 export default async function Home() {
   let customers: Customer[] = [];
@@ -37,6 +38,8 @@ export default async function Home() {
           STATUS: {customer.status}</li>
         ))}
       </ul>
+
+      <AddEntry></AddEntry>
     </div>
   );
 }
