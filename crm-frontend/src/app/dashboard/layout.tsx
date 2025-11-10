@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import {SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/AppSidebar";
 import "./dashboard.css";
 
 const geistSans = Geist({
@@ -17,10 +19,14 @@ export const metadata: Metadata = {
   description: "CRM Dashboard",
 };
 
-export default function DashboardLayout({
-  children,
-  }: {
-    children: React.ReactNode
-  }) {
-  return <section>{children}</section>
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <main className="min-h-screen flex-1">
+        <SidebarTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
+  );
 }

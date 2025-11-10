@@ -1,42 +1,39 @@
-import client from '../../lib/db';
-import Link from 'next/link';
+async function getCustomerData() {
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL
+  if (!baseURL) {
+      throw new Error("NEXT_PUBLIC_BASE_URL environment variable is not set.");
+  }
+  //Fetch data from customers API route
+  const response = await fetch(`${baseURL}/api/customers`, {
+    // Use the base URL configured for your dev environment
+    cache: 'no-store' 
+  }); 
 
-interface Customer {
-  customer_id: number;
-  first_name: string;
-  last_name: string;
-  email_address: string;
-  phone_number: string;
-  address: string;
-  last_contacted: string;
-  notes: string;
-  status: string;
-}
-
-export default async function Home() {
-  let customers: Customer[] = [];
-  try {
-    const result = await client.query('SELECT * FROM customers');
-    customers = result.rows;
-  } catch (error) {
-    console.error('Failed to fetch customers:', error);
+  if (!response.ok) {
+    throw new Error('Failed to fetch data from internal API.');
   }
 
+  return response.json();
+}
+
+export default async function DashboardPage() {
+  // Fetch customer data from the internal API route
+  let customers: any[] = [];
+  try {
+    customers = await getCustomerData();
+
+  } catch (error) {
+    console.error(error);
+    // You might render an error message here
+    return <div>Error loading data. Check console.</div>;
+  }
+  
   return (
     <div>
-      <h1>Customers</h1>
-      <ul>
-        {customers.map((customer) => (
-          <li key={customer.customer_id}>ID: {customer.customer_id}   ||
-          NAME: {customer.first_name} {customer.last_name}    ||
-          EMAIL: {customer.email_address}   ||
-          PHONE NUMBER: {customer.phone_number}  || 
-          ADDRESS: {customer.address}   ||
-          LAST CONTACTED: {customer.last_contacted}   ||
-          NOTES: {customer.notes}   ||
-          STATUS: {customer.status}</li>
-        ))}
-      </ul>
+      <h1>Customer Dashboard</h1>
+      {/* 💡 The 'customers' variable now holds the JSON data */}
+      <pre>{JSON.stringify(customers, null, 2)}</pre>
+      {/* You can now iterate over 'customers' to render your table */}
     </div>
   );
 }
