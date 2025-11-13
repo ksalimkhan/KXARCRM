@@ -9,13 +9,17 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "child_process": "^1.0.2",
     "dgram": "^1.0.1",
+    "dgram-browserify": "^0.0.13",
     "dns": "^0.1.2",
     "js": "^0.1.0",
     "next": "^15.5.4",
     "pg": "^8.16.3",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "simudp": "^0.0.16",
+    "webpack": "^5.102.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -28,5 +32,8 @@
     "eslint-config-next": "15.5.4",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "browser": {
+    "child_process": false
   }
 }
