@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "enoent": "^1.0.0"
-  },
-  "browser":{
-  "child_process": false
-  }
-}  
