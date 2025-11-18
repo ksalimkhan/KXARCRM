@@ -1,3 +1,6 @@
+
+import AddEntry from "./addEntry"
+
 async function getCustomerData() {
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL
   if (!baseURL) {
@@ -16,12 +19,12 @@ async function getCustomerData() {
   return response.json();
 }
 
+
 export default async function DashboardPage() {
   // Fetch customer data from the internal API route
   let customers: any[] = [];
   try {
     customers = await getCustomerData();
-
   } catch (error) {
     console.error(error);
     // You might render an error message here
@@ -34,6 +37,7 @@ export default async function DashboardPage() {
       {/* 💡 The 'customers' variable now holds the JSON data */}
       <pre>{JSON.stringify(customers, null, 2)}</pre>
       {/* You can now iterate over 'customers' to render your table */}
+      <AddEntry />
     </div>
   );
 }

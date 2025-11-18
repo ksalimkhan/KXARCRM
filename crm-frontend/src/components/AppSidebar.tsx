@@ -1,5 +1,5 @@
 import React from 'react'
-import { Calendar, Contact, Database, Home, Inbox, Search, Settings, Star } from "lucide-react"
+import { Calendar, Contact, Database, Home, Inbox, Settings, Star } from "lucide-react"
 import Image from "next/image"
 import {
   Sidebar,

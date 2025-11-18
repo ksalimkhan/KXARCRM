@@ -11,6 +11,7 @@ export default function Home() {
   const [loginStatus, setLoginStatus] = useState('Pending');
   const router = useRouter();
 
+  //Validates Login Data
   const handleLoginSubmit = (username: string, password: string) => {
     setLoginStatus('Checking Credentials...');
     if(username === dummyUser && password === dummyPass){
@@ -28,9 +29,10 @@ export default function Home() {
 
   return (
     <div>
-        {/* 💡 Pass the function down via the 'onLoginSubmit' prop */}
-        <p>Status: {loginStatus}</p>
-        <Login onLoginSubmit={handleLoginSubmit} /> 
+      {/* 💡 Pass the function down via the 'onLoginSubmit' prop */}
+      <p>Status: {loginStatus}</p>
+      {/* Pass Props to Login*/}
+      <Login onLoginSubmit={handleLoginSubmit} />
     </div>
   );
 }

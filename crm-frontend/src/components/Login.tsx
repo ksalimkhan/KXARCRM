@@ -17,6 +17,7 @@ import {
 interface LoginProps {
   onLoginSubmit: (username: string, password: string) => void;
 }
+
 export default function Login({ onLoginSubmit }: LoginProps) {
   //Add state to track input values
   const [email, setEmail] = React.useState("");
