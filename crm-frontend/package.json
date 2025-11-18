@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.81.1",
     "child_process": "^1.0.2",
     "dgram": "^1.0.1",
     "dgram-browserify": "^0.0.13",
