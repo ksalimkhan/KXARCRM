@@ -1,5 +1,5 @@
-
 import AddEntry from "./addEntry"
+import DeleteEntry from "./deleteEntry";
 
 async function getCustomerData() {
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL
@@ -27,17 +27,15 @@ export default async function DashboardPage() {
     customers = await getCustomerData();
   } catch (error) {
     console.error(error);
-    // You might render an error message here
     return <div>Error loading data. Check console.</div>;
   }
   
   return (
     <div>
       <h1>Customer Dashboard</h1>
-      {/* 💡 The 'customers' variable now holds the JSON data */}
       <pre>{JSON.stringify(customers, null, 2)}</pre>
-      {/* You can now iterate over 'customers' to render your table */}
       <AddEntry />
+      <DeleteEntry />
     </div>
   );
 }
