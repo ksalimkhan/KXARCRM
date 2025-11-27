@@ -9,9 +9,9 @@ export default function RemoveEntry() {
   const removeEntry = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    const first_name = (document.getElementById("first_name") as HTMLInputElement).value;
+    const customer_id = (document.getElementById("customer_id") as HTMLInputElement).value;
 
-    const { error } = await supabase.from('customers').delete().eq('first_name', first_name);
+    const { error } = await supabase.from('customers').delete().eq('id', customer_id);
 
     if(error) {
       console.error('Error Removing An Entry');
@@ -22,7 +22,7 @@ export default function RemoveEntry() {
 
   return (
     <>
-      <input id="first_name" placeholder="First Name" />
+      <input id="customer_id" placeholder="Customer ID" />
       <button className = "tab" onClick={removeEntry}>Remove Entry</button>
     </>
   );
