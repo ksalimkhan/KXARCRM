@@ -1,5 +1,5 @@
 import React from 'react'
-import { Calendar, Contact, Database, Home, Inbox, Settings, Star } from "lucide-react"
+import { Calendar, Contact, Database, Home, Inbox, Link, Settings, Star } from "lucide-react"
 import Image from "next/image"
 import {
   Sidebar,
@@ -16,12 +16,12 @@ import {
 const items = [
   {
     title: "Dashboard",
-    url: "/",
+    url: "/dashboard",
     icon: Home,
   },
   {
     title: "Tasks",
-    url: "#",
+    url: "/dashboard/tasks",
     icon: Inbox,
   },
   {
@@ -57,6 +57,7 @@ export const AppSidebar = () => {
         <SidebarContent>
         <SidebarGroup>
             <SidebarGroupLabel>
+              <a href="/">
               <Image
                 className="dark:invert"
                 src="/KXARLOGO.svg"
@@ -65,6 +66,7 @@ export const AppSidebar = () => {
                 height={25}
                 priority
               />
+              </a>
             
             </SidebarGroupLabel>
             <SidebarGroupContent>

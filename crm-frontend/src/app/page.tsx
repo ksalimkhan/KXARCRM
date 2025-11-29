@@ -33,6 +33,7 @@ export default function Home() {
       <p>Status: {loginStatus}</p>
       {/* Pass Props to Login*/}
       <Login onLoginSubmit={handleLoginSubmit} />
+      
     </div>
   );
 }
