@@ -24,7 +24,6 @@ async function getCustomerData() {
   return response.json();
 }
 
-
 export default async function DashboardPage() {
   // Fetch customer data from the internal API route
   let customers: any[] = [];

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Calendar, Contact, Database, Home, Inbox, Link, Settings, Star } from "lucide-react"
 import Image from "next/image"
+import SignOut from "../app/pages/dashboard/signout";
 
 import {
   Sidebar,
@@ -86,6 +87,7 @@ export const AppSidebar = () => {
             </SidebarGroupContent>
         </SidebarGroup>
         </SidebarContent>
+        <SignOut />
     </Sidebar>
   )
 }
