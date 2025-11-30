@@ -43,13 +43,9 @@ export default function Login({ onLoginSubmit }: LoginProps) {
           </CardDescription>
           <CardAction>
             <Button variant="link">
-<<<<<<< HEAD
-              Sign Up
-=======
               <a href="/signup">
               Sign Up
               </a>
->>>>>>> main
             </Button>
           </CardAction>
         </CardHeader>
@@ -96,11 +92,7 @@ export default function Login({ onLoginSubmit }: LoginProps) {
                 </Button>
 
                 <Button type="button" variant="outline" className="w-full">
-<<<<<<< HEAD
-                  <Link href="dashboard" className="w-full"> Login with Google </Link>
-=======
                   <Link href="/pages/dashboard" className="w-full"> Login with Google </Link>
->>>>>>> main
                 </Button>
               </div>
             </div>

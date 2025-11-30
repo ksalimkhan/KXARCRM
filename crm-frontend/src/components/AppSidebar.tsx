@@ -1,15 +1,11 @@
 import React from 'react'
-<<<<<<< HEAD
-import { Calendar, Contact, Database, Home, Inbox, Settings, Star } from "lucide-react"
-import Image from "next/image"
-=======
 import { Calendar, Contact, Database, Home, Inbox, Link, Settings, Star } from "lucide-react"
 import Image from "next/image"
 
->>>>>>> main
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -17,38 +13,21 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-<<<<<<< HEAD
- 
-=======
-
->>>>>>> main
 // Menu items.
 const items = [
   {
     title: "Dashboard",
-<<<<<<< HEAD
-    url: "/",
-=======
     url: "/pages/dashboard",
->>>>>>> main
     icon: Home,
   },
   {
     title: "Tasks",
-<<<<<<< HEAD
-    url: "#",
-=======
     url: "/pages/tasks",
->>>>>>> main
     icon: Inbox,
   },
   {
     title: "Calendar",
-<<<<<<< HEAD
-    url: "#",
-=======
     url: "/pages/calendar",
->>>>>>> main
     icon: Calendar,
   },
   {
@@ -79,10 +58,7 @@ export const AppSidebar = () => {
         <SidebarContent>
         <SidebarGroup>
             <SidebarGroupLabel>
-<<<<<<< HEAD
-=======
               <a href="/">
->>>>>>> main
               <Image
                 className="dark:invert"
                 src="/KXARLOGO.svg"
@@ -91,10 +67,7 @@ export const AppSidebar = () => {
                 height={25}
                 priority
               />
-<<<<<<< HEAD
-=======
               </a>
->>>>>>> main
             
             </SidebarGroupLabel>
             <SidebarGroupContent>
@@ -112,6 +85,11 @@ export const AppSidebar = () => {
             </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>
+        <SidebarFooter>
+            <div className="p-4 text-sm">
+            &copy; {new Date().getFullYear()} KXAR. All rights reserved.
+            </div>
+        </SidebarFooter>
         </SidebarContent>
     </Sidebar>
   )

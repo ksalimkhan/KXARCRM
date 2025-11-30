@@ -14,7 +14,7 @@ export default function SignUpPage() {
     setLoginStatus('Checking Credentials...');
     if(password === confirmPassword && password.length > 4){
       setLoginStatus('Passwords match. Account Created');
-      router.push('/dashboard');
+      router.push('/pages/dashboard');
     } else {
       setLoginStatus("Passwords don't match");
     }
