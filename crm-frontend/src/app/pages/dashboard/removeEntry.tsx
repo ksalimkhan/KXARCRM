@@ -3,6 +3,7 @@
 import {supabase} from "@/app/server/supabaseClient"
 import type { MouseEvent } from "react";
 import { processData } from "@/app/server/processData";
+import { Button } from "@/components/ui/button";
 import "./pageStyle.css";
 
 export default function RemoveEntry() {
@@ -23,7 +24,7 @@ export default function RemoveEntry() {
   return (
     <>
       <input id="customer_id" placeholder="Customer ID" />
-      <button className = "tab" onClick={removeEntry}>Remove Entry</button>
+      <Button onClick={removeEntry}>Remove Entry</Button>
     </>
   );
 }

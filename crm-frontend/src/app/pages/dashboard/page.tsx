@@ -1,7 +1,7 @@
 import AddEntry from "./addEntry";
 import RemoveEntry from "./removeEntry";
 import "./pageStyle.css";
-
+import {Button} from "@/components/ui/button";
 import {
   Card,
   CardAction,
@@ -44,10 +44,10 @@ export default async function DashboardPage() {
       <div>
         <CardHeader>
           <CardTitle>Dashboard</CardTitle>
-          <div className="tabs">
-            <button className="tab">Customers</button>
-            <button className="tab">Projects</button>
-            <button className="tab">Payments</button>
+          <div className="gap-4 flex">
+            <Button>Customers</Button>
+            <Button >Projects</Button>
+            <Button>Payments</Button>
             </div>
             </CardHeader>
 

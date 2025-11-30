@@ -2,6 +2,7 @@
 
 import type { MouseEvent } from "react";
 import { processData } from "@/app/server/processData";
+import { Button } from "@/components/ui/button";
 import "./pageStyle.css";
 
 export default function AddEntry() {
@@ -35,7 +36,7 @@ export default function AddEntry() {
       <input id="new_phone_number" placeholder="Phone Number" />
       <input id="new_address" placeholder="Address" />
       <input id="new_notes" placeholder="Notes" />
-      <button className = "tab" onClick={addEntry}>Add Entry</button>
+      <Button onClick={addEntry}>Add Entry</Button>
     </>
   );
 }
