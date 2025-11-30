@@ -18,16 +18,12 @@ export const metadata: Metadata = {
   description: "KXAR CRM Login Page",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>)
+{
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <ScrollToTop />
         {children}
       </body>
     </html>

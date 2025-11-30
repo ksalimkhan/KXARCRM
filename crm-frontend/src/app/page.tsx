@@ -17,7 +17,7 @@ export default function Home() {
     if(username === dummyUser && password === dummyPass){
       {
         setLoginStatus('Logged In');
-        router.push('/dashboard');
+        router.push('/pages/dashboard');
       }
     } else {
       setLoginStatus('Invalid Credentials');
@@ -29,9 +29,7 @@ export default function Home() {
 
   return (
     <div>
-      {/* 💡 Pass the function down via the 'onLoginSubmit' prop */}
       <p>Status: {loginStatus}</p>
-      {/* Pass Props to Login*/}
       <Login onLoginSubmit={handleLoginSubmit} />
     </div>
   );

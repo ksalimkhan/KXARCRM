@@ -14,19 +14,20 @@ import {
   CardTitle
 } from "@/components/ui/card"
 
-interface LoginProps {
-  onLoginSubmit: (username: string, password: string) => void;
+interface SignUpProps {
+  onSignUpSubmit: (username: string, password: string, confirmPassword: string) => void;
 }
 
-export default function Login({ onLoginSubmit }: LoginProps) {
+export default function SignUp({ onSignUpSubmit }: SignUpProps) {
   //Add state to track input values
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Call the callback function, passing the state values up to the parent
-    onLoginSubmit(email, password); 
+    onSignUpSubmit(email, password, confirmPassword); 
 
     // Clear form fields after submission
     // setEmail('');
@@ -37,25 +38,23 @@ export default function Login({ onLoginSubmit }: LoginProps) {
     <div className="min-h-screen flex items-center justify-center bg-background">
       <Card className="dark flex w-full max-w-sm">
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Create Account</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter information below to create an account
           </CardDescription>
-          <CardAction>
-            <Button variant="link">
-<<<<<<< HEAD
-              Sign Up
-=======
-              <a href="/signup">
-              Sign Up
-              </a>
->>>>>>> main
-            </Button>
-          </CardAction>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-10">
+              <div className="grid gap-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="John Doe"
+                  required
+                />
+              </div>
               <div className="grid gap-2">
                 {/* Email Input */}
                 <Label htmlFor="email">Email</Label>
@@ -68,39 +67,38 @@ export default function Login({ onLoginSubmit }: LoginProps) {
                   required
                 />
               </div>
+              <div className="grid gap-2">
+                {/* Password Input */}
+                <Label htmlFor="email">Password</Label>
+                <Input
+                  id="email"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="**********"
+                  required
+                />
+              </div>
 
               {/* Password Input */}
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </a>
+                  <Label htmlFor="password">Confirm Password</Label>
                 </div>
                 <Input 
-                  id="password" 
+                  id="confirmPassword" 
                   type="password" 
+                  placeholder="**********"
                   required 
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </div>
               
-              <div className="flex flex-col gap-2 pt-4">
+              <div className="flex flex-col gap-2">
                 {/* Submit button for form submission */}
                 <Button type="submit" className="w-full">
-                  Login
-                </Button>
-
-                <Button type="button" variant="outline" className="w-full">
-<<<<<<< HEAD
-                  <Link href="dashboard" className="w-full"> Login with Google </Link>
-=======
-                  <Link href="/pages/dashboard" className="w-full"> Login with Google </Link>
->>>>>>> main
+                  Create Account
                 </Button>
               </div>
             </div>
