@@ -1,4 +1,4 @@
-import {supabase} from "@/lib/supabaseClient"
+import {supabase} from "@/app/server/supabaseClient"
 
 export async function processData(
     first_name: string,
