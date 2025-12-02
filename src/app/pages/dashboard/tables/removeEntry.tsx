@@ -1,10 +1,12 @@
-'use client'
+'use client';
 
 import {supabase} from "@/app/server/supabaseClient"
-import type { MouseEvent } from "react";
 import { processData } from "@/app/server/processData";
+
+import type { MouseEvent } from "react";
+
 import { Button } from "@/components/ui/button";
-import "./pageStyle.css";
+import "./tableStyle.css";
 
 export default function RemoveEntry() {
   const removeEntry = async (event: MouseEvent<HTMLButtonElement>) => {

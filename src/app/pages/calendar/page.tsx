@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import { Calendar } from 'react-calendar';
 import {Card } from '@/components/ui/card';
-import 'react-calendar/dist/Calendar.css'; // Important for styles
-
+import 'react-calendar/dist/Calendar.css';
 
 export default function ShowCalendar() {
     const [value, setValue] = useState(new Date());
