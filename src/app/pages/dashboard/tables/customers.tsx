@@ -35,7 +35,6 @@ export function ShowCustomers () {
                     <th>Address</th>
                     <th>Last Contact</th>
                     <th>Notes</th>
-                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -49,7 +48,6 @@ export function ShowCustomers () {
                         <td>{customer.address}</td>
                         <td>{customer.last_contact}</td>
                         <td>{customer.notes}</td>
-                        <td>{customer.status}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -65,5 +63,3 @@ export function ShowCustomers () {
         </div>
     );
 }
-
-
