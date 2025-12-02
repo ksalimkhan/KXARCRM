@@ -21,7 +21,7 @@ export function ShowProjects () {
 
     return (
         <div>
-        <h2>Payments</h2>
+        <h2>Projects</h2>
             <table>
                 <thead>
                 <tr>
