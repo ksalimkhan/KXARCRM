@@ -47,11 +47,22 @@ export default function Tasks() {
         customer_id: '',
     });
 
-    const [filter, setFilter] = useState<'all' | 'pending' | 'in-progress' | 'completed'>('all');
+    
+    const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'in-progress' | 'completed'>('all');
+
+    //Can remove if not needed
+    const [priorityFilter, setPriorityFilter] = useState<'all' |'high' | 'medium' | 'low'>('all');
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    const filteredTasks = filter === 'all' ? tasks : tasks.filter(task => task.status === filter);
 
+    // Old method for filtering tasks by status only
+    // const filteredTasks = statusFilter === 'all' ? tasks : tasks.filter(task => task.status === statusFilter);
+
+    const filteredTasks = tasks.filter(task => {
+        const matchStatus = statusFilter === 'all' || task.status === statusFilter;
+        const matchPriority = priorityFilter === 'all' || task.priority === priorityFilter;
+        return matchStatus && matchPriority;
+    })
     //Fetches tasks from Supabase and displays them
     useEffect(() => {
         fetchTasks();
@@ -117,6 +128,7 @@ export default function Tasks() {
         }
 
     };
+
     const handleAddTask = async () => {
         const customerIdSent = newTask.customer_id === '' ? null : Number(newTask.customer_id);
         const{data, error} = await supabase
@@ -173,7 +185,7 @@ export default function Tasks() {
         }
         return task;
         }));
-        setFilter('all');
+        setStatusFilter('all');
     };
 
     //Gets total of tasks for that case
@@ -182,6 +194,16 @@ export default function Tasks() {
         pending: tasks.filter(t => t.status === 'pending').length,
         inProgress: tasks.filter(t => t.status === 'in-progress').length,
         completed: tasks.filter(t => t.status === 'completed').length,
+    };
+
+    const handlePriortyFilterChange = (value: string) => {
+        setPriorityFilter(value as 'all' | 'low' | 'medium' | 'high');
+        setStatusFilter('all');
+    };
+
+    const handleStatusFilterChange = (value: string) => {
+        setStatusFilter(value as 'all' | 'pending' | 'in-progress' | 'completed');
+        setPriorityFilter('all');
     };
 
     return (
@@ -195,13 +217,13 @@ export default function Tasks() {
                     <p className="text-2xl text-gray-900 mt-1">{taskStats.total}</p>
                 </CardContent>
             </Card>
-            <Card>
+            <Card className="bg-accent-foreground/4">
                 <CardContent className="p-6">
                     <p className="text-sm text-gray-600">Pending</p>
                     <p className="text-2xl text-gray-900 mt-1">{taskStats.pending}</p>
                 </CardContent>
             </Card>
-            <Card>
+            <Card className="bg-blue-400/15">
                 <CardContent className="p-6">
                     <p className="text-sm text-gray-600">In Progress</p>
                     <p className="text-2xl text-gray-900 mt-1">{taskStats.inProgress}</p>
@@ -223,19 +245,58 @@ export default function Tasks() {
                 <CardTitle>Tasks</CardTitle>
                 <CardDescription>Manage your to-do list and activities</CardDescription>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                 {/* Select Menu for Filtering Tasks */}
-                <Select value={filter} onValueChange={(value: any) => setFilter(value)}>
+                <Select value={statusFilter} onValueChange={handleStatusFilterChange}>
                     <SelectTrigger className="w-40">
                     <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectItem value="all">All Tasks</SelectItem>
-                        <SelectItem value="pending">Pending</SelectItem>
-                        <SelectItem value="in-progress">In Progress</SelectItem>
-                        <SelectItem value="completed">Completed</SelectItem>
+                        <SelectItem value="pending">
+                            <Badge className={getStatusColor("pending")}>
+                                {{pending: 'Pending', 'in-progress': 'In Progress', completed: 'Completed'}["pending"]}
+                            </Badge>
+                        </SelectItem>
+                        <SelectItem value="in-progress">
+                            <Badge className={getStatusColor("in-progress")}>
+                                {{pending: 'Pending', 'in-progress': 'In Progress', completed: 'Completed'}["in-progress"]}
+                            </Badge>
+                        </SelectItem>
+                        <SelectItem value="completed">
+                            <Badge className={getStatusColor("completed")}>
+                                {{pending: 'Pending', 'in-progress': 'In Progress', completed: 'Completed'}["completed"]}
+                            </Badge>
+                        </SelectItem>
                     </SelectContent>
                 </Select>
+                
+                {/* Select Menu for Filtering Tasks */}
+                <Select value={priorityFilter} onValueChange={handlePriortyFilterChange}>
+                    <SelectTrigger className="w-40">
+                    <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="all">All Priorities</SelectItem>
+                        <SelectItem value="high">
+                            <Badge className={getPriorityColor("high")}>
+                                {{low: 'Low', medium: 'Medium', high: 'High'}["high"]}
+                            </Badge>
+                        </SelectItem>
+                        <SelectItem value="medium">
+                            <Badge className={getPriorityColor("medium")}>
+                                {{low: 'Low', medium: 'Medium', high: 'High'}["medium"]}
+                            </Badge>
+                        </SelectItem>
+                        <SelectItem value="low">
+                            <Badge className={getPriorityColor("low")}>
+                                {{low: 'Low', medium: 'Medium', high: 'High'}["low"]}
+                            </Badge>
+                        </SelectItem>
+                    </SelectContent>
+                </Select>
+
+                
 
                 {/* Dialog Box to add a new task */}
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -365,12 +426,10 @@ export default function Tasks() {
                             <Badge className={getStatusColor(task.status)}>
                                 {task.status}
                             </Badge>
-                            <Button
-                                
+                            <Button 
                                 variant="ghost"
                                 size="icon"
                                 onClick={() => handleDeleteTask(task.id)}
-                                
                             >
                                 <Trash className="w-4 h-4" />
                             </Button>
