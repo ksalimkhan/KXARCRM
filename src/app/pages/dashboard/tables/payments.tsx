@@ -1,41 +1,47 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import "./tableStyle.css";
+import { supabase } from '@/app/server/supabaseClient';
 
 export function ShowPayments () {
+
+    const[payments, setPayments] = useState([]);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        const {data, error } = await supabase.from('payments').select('*');
+
+        if (error) {console.error('Error fetching customers: ', error);}
+        else {setPayments(data);}
+    };
+
     return (
         <div>
-            <h2>Projects</h2>
+        <h2>Payments</h2>
             <table>
                 <thead>
                 <tr>
-                    <th>first_name</th>
-                    <th>last_name</th>
-                    <th>project</th>
-                    <th>amount</th>
+                    <th>Payment ID</th>
+                    <th>Customer ID</th>
+                    <th>Project ID</th>
+                    <th>Amount</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Bob</td>
-                    <td>Simon</td>
-                    <td>Logo</td>
-                    <td>$100</td>
-                </tr>
-                <tr>
-                    <td>John</td>
-                    <td>Vargas</td>
-                    <td>Poster</td>
-                    <td>$200</td>
-                </tr>
-                <tr>
-                    <td>Simon</td>
-                    <td>Petrikov</td>
-                    <td>Snow Castle</td>
-                    <td>$1,000,000</td>
-                </tr>
-            </tbody>
+                    {payments.map(payments => (
+                        <tr key={payments.payment_id}>
+                        <td>{payments.payment_id}</td>
+                        <td>{payments.customer_id}</td>
+                        <td>{payments.project_id}</td>
+                        <td>{payments.amount}</td>
+                        </tr>
+                    ))}
+                </tbody>
             </table>
         </div>
     );
 }
-
-
