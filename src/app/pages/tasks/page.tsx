@@ -207,8 +207,8 @@ export default function Tasks() {
     };
 
     return (
-        
-        <div className="space-y-6 p-6">
+        <div className="p-6 max-w-7xl mx-auto">
+        <div className="space-y-6">
         {/* Displays Stats at the top */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <Card>
@@ -452,6 +452,7 @@ export default function Tasks() {
             </div>
             </CardContent>
         </Card>
+        </div>
         </div>
     );
 }
