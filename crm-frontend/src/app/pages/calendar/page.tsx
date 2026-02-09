@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { Calendar } from 'react-calendar';
-import 'react-calendar/dist/Calendar.css'; // Important for styles
+import './calendar.css'; // Important for styles
 import { supabase } from '@/app/server/supabaseClient';
 import { Badge } from '@/components/ui/badge';
 import { User } from 'lucide-react';
+
 
 export default function ShowCalendar() {
     interface Task {
@@ -18,7 +19,7 @@ export default function ShowCalendar() {
     status: 'pending' | 'in-progress' | 'completed';
     customer_id: string;
     }
-    
+
     const [tasks, setTasks] = useState<Task[]>([
     ]);
     
@@ -74,12 +75,28 @@ export default function ShowCalendar() {
         };
 
     const filteredTasks = tasks.filter(task => task.due_date == date.toISOString().substring(0,10))
+    
+    //Tasks setup for highlighting dates
+    const tileTasks = new Set(tasks.map(task => task.due_date))
+
+    // Function used for highlighting dates w/ tasks due
+    function tileClassName({ date, view }) {
+        if (view === 'month') {
+            const formattedDate = date.toISOString().substring(0,10)
+            if(tileTasks.has(formattedDate))
+                return 'highlight'
+        }
+    }
 
     return (
         <div>
         <h1>Select a Date</h1>
-        <Calendar onChange={handleDateChange} value={date}/>
-        {/* <p>Selected Date: {date.toISOString()}</p> */}
+        <Calendar onChange={handleDateChange} 
+            // Calls tileClassName function to determine what dates have tasks due and should be highlighted
+            tileClassName={tileClassName}
+            value={date}
+        />
+
         {filteredTasks.map((task) => (
                 <div
                     key={task.id}
