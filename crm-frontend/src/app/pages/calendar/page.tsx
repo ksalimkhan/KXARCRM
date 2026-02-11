@@ -125,7 +125,6 @@ export default function ShowCalendar() {
                             {task.assignee}
                         </div>
                         <div className="flex items-center gap-1">
-                            {/* <Calendar className="w-4 h-4" /> */}
                             {new Date(task.due_date).toISOString().substring(0,10)}
                         </div>
                         <div className="text-gray-500">Related: {task.customer_id}</div>
