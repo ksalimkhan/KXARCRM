@@ -45,9 +45,9 @@ export default function TeamPage() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     // Fetch team members from Supabase
-    useEffect(() => {
-        fetchTeamMembers();
-    }, []);
+    // useEffect(() => {
+    //     fetchTeamMembers();
+    // }, []);
 
     const fetchTeamMembers = async () => {
         const { data, error } = await supabase
