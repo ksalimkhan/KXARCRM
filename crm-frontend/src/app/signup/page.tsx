@@ -15,7 +15,7 @@ export default function SignUpPage() {
           email: email,
           password: password,
       })
-      window.location.href = 'http://localhost:3000/'
+      window.location.href = 'http://localhost:3000/login/'
   }
 
   return (
