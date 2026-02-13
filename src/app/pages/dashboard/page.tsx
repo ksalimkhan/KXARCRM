@@ -2,7 +2,6 @@
 
 import "./pageStyle.css";
 import { Button } from "@/components/ui/button";
-import { TableButtons } from "@/app/pages/dashboard/switcher";
 import React, { useState } from 'react';
 
 import {
@@ -15,36 +14,33 @@ import {
   CardTitle
 } from "@/components/ui/card";
 
-import { ShowCustomers } from "@/app/pages/dashboard/tables/customers";
-import { ShowProjects } from "@/app/pages/dashboard/tables/projects";
-import { ShowPayments } from "@/app/pages/dashboard/tables/payments";
+import { GraphicDesign } from "@/app/pages/dashboard/types/graph";
+import { Medical } from "@/app/pages/dashboard/types/medical";
 
-const tables = {
-  A: <ShowCustomers />,
-  B: <ShowProjects />,
-  C: <ShowPayments />,
+const business_types = {
+  A: <GraphicDesign />,
+  B: <Medical />,
 };
 
 export default function DashboardPage() {
 
-  const[activeTable, setActiveTable] = useState('A');
+  const[activeType, setActiveType] = useState('A');
 
   return (
-    <Card className="m-8 p-8">
-      <div>
-        <CardHeader>
-          <CardTitle>Dashboard</CardTitle>
-          <div className="gap-4 flex">
-            <Button onClick={() => setActiveTable('A')}>Customers</Button>
-            <Button onClick={() => setActiveTable('B')}>Projects</Button>
-            <Button onClick={() => setActiveTable('C')}>Payments</Button>
-          </div>
-        </CardHeader>
 
-        <CardContent>
-          {tables[activeTable]}
-        </CardContent>
-      </div>
-    </Card>
+    <>
+
+    <div>
+      <label for="bis_type">Buisness Type </label>
+      <select id="bis_type" className="bis_type">
+        <option value="Graphic Design" onClick = {() => setActiveType('A')}>Graphic Design</option>
+        <option value="Medical" onClick = {() => setActiveType('B')}>Medical</option>
+      </select>
+    </div>
+
+    {business_types[activeType]}
+
+    </>
+
   );
 }
