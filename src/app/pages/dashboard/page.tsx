@@ -31,7 +31,7 @@ export default function DashboardPage() {
     <>
 
     <div>
-      <label for="bis_type">Buisness Type </label>
+      <label htmlFor="bis_type">Business Type</label>
       <select id="bis_type" className="bis_type">
         <option value="Graphic Design" onClick = {() => setActiveType('A')}>Graphic Design</option>
         <option value="Medical" onClick = {() => setActiveType('B')}>Medical</option>
