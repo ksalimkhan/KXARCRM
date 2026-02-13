@@ -1,9 +1,11 @@
-'use client'
+'use client';
+
+import { processData } from "@/app/server/processData";
 
 import type { MouseEvent } from "react";
-import { processData } from "@/app/server/processData";
+
 import { Button } from "@/components/ui/button";
-import "./pageStyle.css";
+import "./tableStyle.css";
 
 export default function AddEntry() {
   const addEntry = async (event: MouseEvent<HTMLButtonElement>) => {

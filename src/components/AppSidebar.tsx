@@ -48,7 +48,7 @@ const items = [
   },
   {
     title: "Our Team",
-    url: "#",
+    url: "/pages/teams",
     icon: Star,
   },
 ]
