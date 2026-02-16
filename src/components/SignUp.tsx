@@ -38,7 +38,7 @@ export default function SignUp({ onSignUpSubmit }: SignUpProps) {
     <div className="min-h-screen flex items-center justify-center bg-background">
       <Card className="dark flex w-full max-w-sm">
         <CardHeader>
-          <CardTitle>Create Account</CardTitle>
+          <CardTitle>Account Creation</CardTitle>
           <CardDescription>
             Enter information below to create an account
           </CardDescription>
