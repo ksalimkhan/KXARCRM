@@ -9,11 +9,16 @@ export default function SignUpPage() {
   const [loginStatus, setLoginStatus] = useState('Pending');
 
 
-  async function signUp(email: string, password: string, confirmPassword: string){
+  async function signUp(full_name: string, email: string, password: string, confirmPassword: string){
     // Calls supabase auth function to signup
       const {data : {session}, error} = await supabase.auth.signUp({
           email: email,
           password: password,
+          options: {
+            data: {
+              name: full_name,
+            },
+          },
       })
       if(error) alert(error.message)
       if(!session) alert('Check your email to verify your account')

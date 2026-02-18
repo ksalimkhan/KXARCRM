@@ -15,19 +15,18 @@ import {
 } from "@/components/ui/card"
 
 interface SignUpProps {
-  onSignUpSubmit: (username: string, password: string, confirmPassword: string) => void;
+  onSignUpSubmit: (full_name: string, username: string, password: string, confirmPassword: string) => void;
 }
 
 export default function SignUp({ onSignUpSubmit }: SignUpProps) {
-  //Add state to track input values
+  const [full_name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Call the callback function, passing the state values up to the parent
-    onSignUpSubmit(email, password, confirmPassword);
+    onSignUpSubmit(full_name, email, password, confirmPassword);
 
     // Clear form fields after submission
     // setEmail('');
@@ -51,6 +50,8 @@ export default function SignUp({ onSignUpSubmit }: SignUpProps) {
                 <Input
                   id="name"
                   type="text"
+                  value={full_name}
+                  onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
                   required
                 />
@@ -96,7 +97,6 @@ export default function SignUp({ onSignUpSubmit }: SignUpProps) {
               </div>
 
               <div className="flex flex-col gap-2">
-                {/* Submit button for form submission */}
                 <Button type="submit" className="w-full">
                   Create Account
                 </Button>
