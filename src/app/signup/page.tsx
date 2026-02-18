@@ -15,7 +15,7 @@ export default function SignUpPage() {
           email: email,
           password: password,
       })
-      window.location.href = 'http://localhost:3000/login/'
+      window.location.href = 'http://localhost:3000/login'
   }
 
   return (
@@ -24,7 +24,7 @@ export default function SignUpPage() {
       <p>Status: {loginStatus}</p>
       {/* Pass Props to Login*/}
       <SignUp onSignUpSubmit={signUp} />
-      
+
     </div>
   );
 }

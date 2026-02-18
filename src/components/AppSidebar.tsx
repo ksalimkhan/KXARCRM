@@ -48,7 +48,7 @@ const items = [
   },
   {
     title: "Our Team",
-    url: "#",
+    url: "/pages/teams",
     icon: Star,
   },
 ]
@@ -69,7 +69,7 @@ export const AppSidebar = () => {
                 priority
               />
               </a>
-            
+
             </SidebarGroupLabel>
             <SidebarGroupContent>
             <SidebarMenu>

@@ -1,8 +1,7 @@
 'use client';
 
-import "./pageStyle.css";
+import "@/app/pages/dashboard/pageStyle.css";
 import { Button } from "@/components/ui/button";
-import { TableButtons } from "@/app/pages/dashboard/switcher";
 import React, { useState } from 'react';
 
 import {
@@ -25,7 +24,7 @@ const tables = {
   C: <ShowPayments />,
 };
 
-export default function DashboardPage() {
+export function GraphicDesign() {
 
   const[activeTable, setActiveTable] = useState('A');
 

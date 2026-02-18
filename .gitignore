@@ -3,8 +3,6 @@ node_modules/
 .next/
 out/
 dist/
-.venv/
-crm-frontend/.next/
 
 # --- Env files (private secrets) ---
 .env
