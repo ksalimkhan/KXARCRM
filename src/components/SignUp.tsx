@@ -16,9 +16,10 @@ import {
 
 interface SignUpProps {
   onSignUpSubmit: (username: string, password: string, confirmPassword: string) => void;
+  variant?: "page" | "modal";
 }
 
-export default function SignUp({ onSignUpSubmit }: SignUpProps) {
+export default function SignUp({ onSignUpSubmit, variant = "page" }: SignUpProps) {
   //Add state to track input values
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -34,9 +35,8 @@ export default function SignUp({ onSignUpSubmit }: SignUpProps) {
     // setPassword('');
   };
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <Card className="dark flex w-full max-w-sm">
+  const content = (
+    <Card className="dark flex w-full max-w-sm">
         <CardHeader>
           <CardTitle>Create Account</CardTitle>
           <CardDescription>
@@ -105,6 +105,13 @@ export default function SignUp({ onSignUpSubmit }: SignUpProps) {
           </form>
         </CardContent>
       </Card>
+  );
+
+  if (variant === "modal") return content;
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-background">
+      {content}
     </div>
-  )
+  );
 }

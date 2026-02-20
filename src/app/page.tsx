@@ -1,6 +1,35 @@
+"use client";
+
+import React, { useState } from "react";
+import { supabase } from "@/app/server/supabaseClient";
+import SignUpModal from "@/components/SignUpModal";
+import LoginModal from "@/components/LoginModal";
 import styles from "./landing.module.css";
+import { Sign } from "crypto";
+
 
 export default function LandingPage() {
+  const [loginStatus, setLoginStatus] = useState<string>("");
+
+  async function signUp(email: string, password: string, confirmPassword: string) {
+    // if (password !== confirmPassword) {
+    //   setLoginStatus("Passwords do not match");
+    //   return;
+    // }
+
+    const { error } = await supabase.auth.signUp({ email, password });
+
+    if (error) setLoginStatus(error.message);
+    else setLoginStatus("Signed up! Check your email to confirm.");
+  }
+
+  async function signIn(email: string, password: string) {
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    window.location.href= "/pages/dashboard";
+    if (error) throw error;
+  }
+  
+
   return (
     <div className={styles.page}>
       <header className={styles.nav}>
@@ -14,9 +43,8 @@ export default function LandingPage() {
           <a href="#features">Features</a>
           <a href="#pricing">Pricing</a>
           <a href="#contact">Contact</a>
-          <a className={styles.secondary} href="/login"> 
-            Sign in
-          </a>
+          <LoginModal onLoginSubmit={signIn} triggerText="Sign in" />
+          <SignUpModal onSignUpSubmit={signUp} triggerText="Sign Up" />
         </nav>
       </header>
 
