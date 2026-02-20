@@ -38,7 +38,7 @@ export default function SignUp({ onSignUpSubmit, variant = "page" }: SignUpProps
   const content = (
     <Card className="dark flex w-full max-w-sm">
         <CardHeader>
-          <CardTitle>Create Account</CardTitle>
+          <CardTitle>Account Creation</CardTitle>
           <CardDescription>
             Enter information below to create an account
           </CardDescription>
