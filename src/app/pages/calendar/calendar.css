@@ -1,8 +1,8 @@
 .react-calendar {
 
-  /* margin-left: auto;
+  margin-left: auto;
   
-  margin-right: auto; */
+  margin-right: auto;
 
   width: 500px;
 
@@ -185,9 +185,9 @@
 
 .react-calendar__tile {
 
-  /* width: 50px;
+  width: 50px;
 
-  height: 50px; */
+  height: 50px;
 
   max-width: 100%;
 

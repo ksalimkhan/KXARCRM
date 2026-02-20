@@ -25,11 +25,11 @@ interface TeamMember {
 export default function TeamPage() {
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
         // Dummy data for testing
-        { id: 1, name: 'Sarah Johnson', role: 'Manager', initials: 'SJ', status: 'active', completed_tasks: 34, in_progress_tasks: 5, performance: 92 },
-        { id: 2, name: 'Mike Williams', role: 'Developer', initials: 'MW', status: 'active', completed_tasks: 28, in_progress_tasks: 8, performance: 85 },
-        { id: 3, name: 'Emily Davis', role: 'Designer', initials: 'ED', status: 'active', completed_tasks: 31, in_progress_tasks: 4, performance: 88 },
-        { id: 4, name: 'David Brown', role: 'Developer', initials: 'DB', status: 'active', completed_tasks: 22, in_progress_tasks: 6, performance: 78 },
-        { id: 5, name: 'Lisa Anderson', role: 'Manager', initials: 'LA', status: 'inactive', completed_tasks: 42, in_progress_tasks: 3, performance: 95 },
+    //     { id: 1, name: 'Sarah Johnson', role: 'Manager', initials: 'SJ', status: 'active', completed_tasks: 34, in_progress_tasks: 5, performance: 92 },
+    //     { id: 2, name: 'Mike Williams', role: 'Developer', initials: 'MW', status: 'active', completed_tasks: 28, in_progress_tasks: 8, performance: 85 },
+    //     { id: 3, name: 'Emily Davis', role: 'Designer', initials: 'ED', status: 'active', completed_tasks: 31, in_progress_tasks: 4, performance: 88 },
+    //     { id: 4, name: 'David Brown', role: 'Developer', initials: 'DB', status: 'active', completed_tasks: 22, in_progress_tasks: 6, performance: 78 },
+    //     { id: 5, name: 'Lisa Anderson', role: 'Manager', initials: 'LA', status: 'inactive', completed_tasks: 42, in_progress_tasks: 3, performance: 95 },
     ]);
 
     const [newMember, setNewMember] = useState({
@@ -45,9 +45,9 @@ export default function TeamPage() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     // Fetch team members from Supabase
-    // useEffect(() => {
-    //     fetchTeamMembers();
-    // }, []);
+    useEffect(() => {
+        fetchTeamMembers();
+    }, []);
 
     const fetchTeamMembers = async () => {
         const { data, error } = await supabase

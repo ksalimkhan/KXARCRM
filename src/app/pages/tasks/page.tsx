@@ -18,29 +18,33 @@ interface Task {
     id: number;
     title: string;
     description: string;
-    assignee: string;
+    assignee_id: number;
     due_date: string;
     priority: 'low' | 'medium' | 'high';
     status: 'pending' | 'in-progress' | 'completed';
     customer_id: string;
 }
 
+interface TeamMember {
+    id: number;
+    member_name: string;
+    role: string;
+    initials: string;
+    status: 'active' | 'inactive';
+    completed_tasks: number;
+    in_progress_tasks: number;
+    performance: number;
+}
 
 export default function Tasks() {
     //Pushes default Tasks to board
     const [tasks, setTasks] = useState<Task[]>([
-        //Dummy Data for testing
-        // { id: 1, title: 'Follow up with John Smith', description: 'Send proposal document', assignee: 'You', due_date: '2025-11-01', priority: 'high', status: 'pending', customer_id: 'Acme Corp' },
-        // { id: 2, title: 'Schedule demo call', description: 'Product demo for TechStart', assignee: 'Sarah', due_date: '2025-11-02', priority: 'medium', status: 'in-progress', customer_id: 'TechStart Inc' },
-        // { id: 3, title: 'Prepare contract', description: 'Draft and review contract', assignee: 'You', due_date: '2025-11-05', priority: 'high', status: 'pending', customer_id: 'Global Solutions' },
-        // { id: 4, title: 'Send thank you email', description: 'Follow up after meeting', assignee: 'Mike', due_date: '2025-10-31', priority: 'low', status: 'completed', customer_id: 'Innovation Labs' },
-        // { id: 5, title: 'Update CRM records', description: 'Add meeting notes', assignee: 'You', due_date: '2025-11-03', priority: 'medium', status: 'in-progress', customer_id: 'Future Tech' },
     ]);
 
     const [newTask, setNewTask] = useState({
         title: '',
         description: '',
-        assignee: '',
+        assignee_id: '',
         due_date: '',
         priority: 'medium' as const,
         status: 'pending' as const,
@@ -67,8 +71,7 @@ export default function Tasks() {
     useEffect(() => {
         fetchTasks();
     }, []);
-
-    
+ 
     const fetchTasks = async () => {
         const {data, error } = await supabase
         .from('tasks')
@@ -134,19 +137,10 @@ export default function Tasks() {
         const{data, error} = await supabase
         .from('tasks')
         .insert([
-        // const task: Task = {
-        // id: tasks.length + 1,
-        // //Takes in whatever the user inputs and puts it in new Task
-        // ...newTask,
-        // };
-        // //Adds new task to task list
-        // setTasks([...tasks, task]);
-        // //Resets Form to Empty
-        // setNewTask({
         {
             title: newTask.title,
             description: newTask.description,
-            assignee: newTask.assignee,
+            assignee_id: newTask.assignee_id,
             due_date: newTask.due_date,
             priority: newTask.priority,
             status: newTask.status,
@@ -165,7 +159,7 @@ export default function Tasks() {
             setNewTask({
                 title: '',
                 description: '',
-                assignee: '',
+                assignee_id: '',
                 due_date: '',
                 priority: 'medium',
                 status: 'pending',
@@ -205,6 +199,32 @@ export default function Tasks() {
         setStatusFilter(value as 'all' | 'pending' | 'in-progress' | 'completed');
         setPriorityFilter('all');
     };
+
+    //Teams page integration beginning
+    const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
+    ]);
+
+    useEffect(() => {
+            fetchTeamMembers();
+        }, []);
+    
+    const fetchTeamMembers = async () => {
+        const { data, error } = await supabase
+            .from('team_members')
+            .select('*')
+            .order('id', { ascending: true });
+
+        if (error) {
+            console.error('Error fetching team members:', error);
+        } else {
+            setTeamMembers(data as TeamMember[]);
+        }
+    };
+
+    function getAssignee(task: Task) {
+        const member = teamMembers.filter(member => member.id=task.assignee_id)
+        return member[0].member_name
+    }
 
     return (
         <div className="p-6 max-w-7xl mx-auto">
@@ -296,8 +316,6 @@ export default function Tasks() {
                     </SelectContent>
                 </Select>
 
-                
-
                 {/* Dialog Box to add a new task */}
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                     <DialogTrigger asChild>
@@ -332,12 +350,14 @@ export default function Tasks() {
                         </div>
                         <div className="space-y-2">
                         <Label htmlFor="task-assignee">Assignee</Label>
-                        <Input
-                            id="task-assignee"
-                            value={newTask.assignee}
-                            onChange={(e) => setNewTask({ ...newTask, assignee: e.target.value })}
-                            placeholder="You"
-                        />
+                            <select name="team_members" onChange={(e) => setNewTask({ ...newTask, assignee_id: e.target.value})}>
+                                <option value="">Choose Team Member</option>
+                                {teamMembers.map((member) => (
+                                    <option key={member.id} value={member.id}> 
+                                        {member.member_name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="space-y-2">
                         <Label htmlFor="task-related">Related To</Label>
@@ -438,7 +458,9 @@ export default function Tasks() {
                     <div className="flex items-center gap-4 text-sm text-gray-600">
                         <div className="flex items-center gap-1">
                             <User className="w-4 h-4" />
-                            {task.assignee}
+                            {/* {member = teamMembers.filter(member => member.id=task.assignee_id).member_name}
+                            {task.assignee_id.member_name} */}
+                            {getAssignee(task)}
                         </div>
                         <div className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
