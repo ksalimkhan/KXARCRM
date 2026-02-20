@@ -33,7 +33,7 @@ export default function TeamPage() {
     ]);
 
     const [newMember, setNewMember] = useState({
-        name: '',
+        member_name: '',
         role: '',
         initials: '',
         status: 'active' as const,
@@ -76,7 +76,7 @@ export default function TeamPage() {
             .from('team_members')
             .insert([
                 {
-                    name: newMember.name,
+                    name: newMember.member_name,
                     role: newMember.role,
                     initials: newMember.initials,
                     status: newMember.status,
@@ -93,7 +93,7 @@ export default function TeamPage() {
         } else {
             setTeamMembers([...teamMembers, data[0]]);
             setNewMember({
-                name: '',
+                member_name: '',
                 role: '',
                 initials: '',
                 status: 'active',
@@ -145,8 +145,8 @@ export default function TeamPage() {
                                         <Label htmlFor="member-name">Name</Label>
                                         <Input
                                             id="member-name"
-                                            value={newMember.name}
-                                            onChange={(e) => setNewMember({ ...newMember, name: e.target.value })}
+                                            value={newMember.member_name}
+                                            onChange={(e) => setNewMember({ ...newMember, member_name: e.target.value })}
                                             placeholder="John Doe"
                                         />
                                     </div>
@@ -266,7 +266,7 @@ export default function TeamPage() {
                                         </div>
                                         <div className="flex-1">
                                             <div className="flex items-center gap-2">
-                                                <h4 className="font-medium text-gray-900">{member.name}</h4>
+                                                <h4 className="font-medium text-gray-900">{member.member_name}</h4>
                                                 <div className={`w-2 h-2 rounded-full ${getStatusColor(member.status)}`}></div>
                                             </div>
                                             <p className="text-sm text-gray-500">{member.role}</p>
