@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Calendar } from 'react-calendar';
-import './calendar.css'; // Important for styles
+import './calendar.css';
 import { supabase } from '@/app/server/supabaseClient';
 import { Badge } from '@/components/ui/badge';
 import { User } from 'lucide-react';
@@ -22,11 +22,11 @@ export default function ShowCalendar() {
 
     const [tasks, setTasks] = useState<Task[]>([
     ]);
-    
+
     const [date, setValue] = useState(new Date());
 
     const handleDateChange = (date) => {
-        setValue(date); // Update the selected date
+        setValue(date);
     };
 
     const getPriorityColor = (priority: string) => {
@@ -42,7 +42,6 @@ export default function ShowCalendar() {
         }
     };
 
-    //Based on case, shows corresponding color
     const getStatusColor = (status: string) => {
         switch (status) {
         case 'completed':
@@ -65,17 +64,16 @@ export default function ShowCalendar() {
             .from('tasks')
             .select('*')
             .order('id', { ascending: true });
-    
+
             if (error) {
                 console.error('Error fetching tasks:', error);
             } else {
-                
                 setTasks(data as Task[]);
             }
         };
 
     const filteredTasks = tasks.filter(task => task.due_date == date.toISOString().substring(0,10))
-    
+
     //Tasks setup for highlighting dates
     const tileTasks = new Set(tasks.map(task => task.due_date))
 
@@ -91,7 +89,7 @@ export default function ShowCalendar() {
     return (
         <div>
         <h1>Select a Date</h1>
-        <Calendar onChange={handleDateChange} 
+        <Calendar onChange={handleDateChange}
             // Calls tileClassName function to determine what dates have tasks due and should be highlighted
             tileClassName={tileClassName}
             value={date}
@@ -122,10 +120,10 @@ export default function ShowCalendar() {
                     <div className="flex items-center gap-4 text-sm text-gray-600">
                         <div className="flex items-center gap-1">
                             <User className="w-4 h-4" />
-                            {task.assignee}
+                            Assigned to: {task.assignee}
                         </div>
                         <div className="flex items-center gap-1">
-                            {new Date(task.due_date).toISOString().substring(0,10)}
+                            Due: {new Date(task.due_date).toISOString().substring(0,10)}
                         </div>
                         <div className="text-gray-500">Related: {task.customer_id}</div>
                     </div>

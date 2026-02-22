@@ -47,7 +47,7 @@ export default function Tasks() {
         customer_id: '',
     });
 
-    
+
     const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'in-progress' | 'completed'>('all');
 
     //Can remove if not needed
@@ -68,7 +68,7 @@ export default function Tasks() {
         fetchTasks();
     }, []);
 
-    
+
     const fetchTasks = async () => {
         const {data, error } = await supabase
         .from('tasks')
@@ -78,11 +78,11 @@ export default function Tasks() {
         if (error) {
             console.error('Error fetching tasks:', error);
         } else {
-            
+
             setTasks(data as Task[]);
         }
     };
-    
+
     const getPriorityColor = (priority: string) => {
         switch (priority) {
             case 'high':
@@ -270,7 +270,7 @@ export default function Tasks() {
                         </SelectItem>
                     </SelectContent>
                 </Select>
-                
+
                 {/* Select Menu for Filtering Tasks */}
                 <Select value={priorityFilter} onValueChange={handlePriortyFilterChange}>
                     <SelectTrigger className="w-40">
@@ -296,7 +296,7 @@ export default function Tasks() {
                     </SelectContent>
                 </Select>
 
-                
+
 
                 {/* Dialog Box to add a new task */}
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -426,7 +426,7 @@ export default function Tasks() {
                             <Badge className={getStatusColor(task.status)}>
                                 {task.status}
                             </Badge>
-                            <Button 
+                            <Button
                                 variant="ghost"
                                 size="icon"
                                 onClick={() => handleDeleteTask(task.id)}

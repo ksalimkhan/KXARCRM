@@ -25,15 +25,15 @@ interface TeamMember {
 export default function TeamPage() {
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
         // Dummy data for testing
-        { id: 1, name: 'Sarah Johnson', role: 'Manager', initials: 'SJ', status: 'active', completed_tasks: 34, in_progress_tasks: 5, performance: 92 },
-        { id: 2, name: 'Mike Williams', role: 'Developer', initials: 'MW', status: 'active', completed_tasks: 28, in_progress_tasks: 8, performance: 85 },
-        { id: 3, name: 'Emily Davis', role: 'Designer', initials: 'ED', status: 'active', completed_tasks: 31, in_progress_tasks: 4, performance: 88 },
-        { id: 4, name: 'David Brown', role: 'Developer', initials: 'DB', status: 'active', completed_tasks: 22, in_progress_tasks: 6, performance: 78 },
-        { id: 5, name: 'Lisa Anderson', role: 'Manager', initials: 'LA', status: 'inactive', completed_tasks: 42, in_progress_tasks: 3, performance: 95 },
+    //     { id: 1, name: 'Sarah Johnson', role: 'Manager', initials: 'SJ', status: 'active', completed_tasks: 34, in_progress_tasks: 5, performance: 92 },
+    //     { id: 2, name: 'Mike Williams', role: 'Developer', initials: 'MW', status: 'active', completed_tasks: 28, in_progress_tasks: 8, performance: 85 },
+    //     { id: 3, name: 'Emily Davis', role: 'Designer', initials: 'ED', status: 'active', completed_tasks: 31, in_progress_tasks: 4, performance: 88 },
+    //     { id: 4, name: 'David Brown', role: 'Developer', initials: 'DB', status: 'active', completed_tasks: 22, in_progress_tasks: 6, performance: 78 },
+    //     { id: 5, name: 'Lisa Anderson', role: 'Manager', initials: 'LA', status: 'inactive', completed_tasks: 42, in_progress_tasks: 3, performance: 95 },
     ]);
 
     const [newMember, setNewMember] = useState({
-        name: '',
+        member_name: '',
         role: '',
         initials: '',
         status: 'active' as const,
@@ -45,9 +45,9 @@ export default function TeamPage() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     // Fetch team members from Supabase
-    // useEffect(() => {
-    //     fetchTeamMembers();
-    // }, []);
+    useEffect(() => {
+        fetchTeamMembers();
+    }, []);
 
     const fetchTeamMembers = async () => {
         const { data, error } = await supabase
@@ -67,8 +67,8 @@ export default function TeamPage() {
     const activeMembers = teamMembers.filter(m => m.status === 'active').length;
     const totalCompleted = teamMembers.reduce((sum, m) => sum + m.completed_tasks, 0);
     const totalInProgress = teamMembers.reduce((sum, m) => sum + m.in_progress_tasks, 0);
-    const avgPerformance = teamMembers.length > 0 
-        ? Math.round(teamMembers.reduce((sum, m) => sum + m.performance, 0) / teamMembers.length) 
+    const avgPerformance = teamMembers.length > 0
+        ? Math.round(teamMembers.reduce((sum, m) => sum + m.performance, 0) / teamMembers.length)
         : 0;
 
     const handleAddMember = async () => {
@@ -76,7 +76,7 @@ export default function TeamPage() {
             .from('team_members')
             .insert([
                 {
-                    name: newMember.name,
+                    name: newMember.member_name,
                     role: newMember.role,
                     initials: newMember.initials,
                     status: newMember.status,
@@ -93,7 +93,7 @@ export default function TeamPage() {
         } else {
             setTeamMembers([...teamMembers, data[0]]);
             setNewMember({
-                name: '',
+                member_name: '',
                 role: '',
                 initials: '',
                 status: 'active',
@@ -145,8 +145,8 @@ export default function TeamPage() {
                                         <Label htmlFor="member-name">Name</Label>
                                         <Input
                                             id="member-name"
-                                            value={newMember.name}
-                                            onChange={(e) => setNewMember({ ...newMember, name: e.target.value })}
+                                            value={newMember.member_name}
+                                            onChange={(e) => setNewMember({ ...newMember, member_name: e.target.value })}
                                             placeholder="John Doe"
                                         />
                                     </div>
@@ -266,7 +266,7 @@ export default function TeamPage() {
                                         </div>
                                         <div className="flex-1">
                                             <div className="flex items-center gap-2">
-                                                <h4 className="font-medium text-gray-900">{member.name}</h4>
+                                                <h4 className="font-medium text-gray-900">{member.member_name}</h4>
                                                 <div className={`w-2 h-2 rounded-full ${getStatusColor(member.status)}`}></div>
                                             </div>
                                             <p className="text-sm text-gray-500">{member.role}</p>
