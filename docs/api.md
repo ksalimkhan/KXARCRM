@@ -15,6 +15,6 @@ The main errors arise when packages aren't installed or significant errors exist
 
 # Example
 The best example is to just run "npm run dev" in the console while in the root directory of our project.
-![Output of npm run dev]()\
+![Output of npm run dev](./npm-example.png)\
 
 # Other Notes
