@@ -1,39 +1,30 @@
-'use client';
+"use client";
 
-import {supabase} from "@/app/server/supabaseClient"
-import React from 'react'
-import SignUp from "@/components/SignUp"
-import {useState} from "react"
+import React, { useState } from "react";
+import { supabase } from "@/app/server/supabaseClient";
+import SignUpModal from "@/components/SignUpModal";
 
 export default function SignUpPage() {
-  const [loginStatus, setLoginStatus] = useState('Pending');
+  const [loginStatus, setLoginStatus] = useState("Pending");
 
+  async function signUp(email: string, password: string, confirmPassword: string) {
+    if (password !== confirmPassword) {
+      setLoginStatus("Passwords do not match");
+      return;
+    }
 
-  async function signUp(full_name: string, email: string, password: string, confirmPassword: string){
-    // Calls supabase auth function to signup
-      const {data : {session}, error} = await supabase.auth.signUp({
-          email: email,
-          password: password,
-          options: {
-            data: {
-              name: full_name,
-            },
-          },
-      })
-      if(error) alert(error.message)
-      if(!session) alert('Check your email to verify your account')
-      window.location.href = 'http://localhost:3000/login'
+    const { data, error } = await supabase.auth.signUp({ email, password });
 
-
+    if (error) setLoginStatus(error.message);
+    else setLoginStatus("Signed up!");
   }
 
   return (
-    <div>
-      {/* 💡 Pass the function down via the 'onLoginSubmit' prop */}
-      <p>Status: {loginStatus}</p>
-      {/* Pass Props to Login*/}
-      <SignUp onSignUpSubmit={signUp} />
-
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="flex flex-col gap-4 items-center">
+        <p>Status: {loginStatus}</p>
+        <SignUpModal onSignUpSubmit={signUp} triggerText="Sign up" />
+      </div>
     </div>
   );
 }

@@ -22,7 +22,7 @@ export default function ShowCalendar() {
 
     const [tasks, setTasks] = useState<Task[]>([
     ]);
-    
+
     const [date, setValue] = useState(new Date());
 
     const handleDateChange = (date) => {
@@ -64,7 +64,7 @@ export default function ShowCalendar() {
             .from('tasks')
             .select('*')
             .order('id', { ascending: true });
-    
+
             if (error) {
                 console.error('Error fetching tasks:', error);
             } else {
@@ -73,7 +73,7 @@ export default function ShowCalendar() {
         };
 
     const filteredTasks = tasks.filter(task => task.due_date == date.toISOString().substring(0,10))
-    
+
     //Tasks setup for highlighting dates
     const tileTasks = new Set(tasks.map(task => task.due_date))
 
@@ -89,12 +89,12 @@ export default function ShowCalendar() {
     return (
         <div>
         <h1>Select a Date</h1>
-        <Calendar onChange={handleDateChange} 
+        <Calendar onChange={handleDateChange}
             // Calls tileClassName function to determine what dates have tasks due and should be highlighted
             tileClassName={tileClassName}
             value={date}
         />
-        
+
         {filteredTasks.map((task) => (
                 <div
                     key={task.id}

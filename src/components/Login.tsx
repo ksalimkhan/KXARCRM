@@ -3,6 +3,7 @@ import Link from "next/link";
 import {Label} from "@/components/ui/label"
 import {Input} from "@/components/ui/input"
 import {Button} from "@/components/ui/button"
+import SignUpModal from "@/components/SignUpModal";
 
 import {
   Card,
@@ -16,9 +17,10 @@ import {
 
 interface LoginProps {
   onLoginSubmit: (username: string, password: string) => void;
+  variant?: "page" | "modal";
 }
 
-export default function Login({ onLoginSubmit }: LoginProps) {
+export default function Login({ onLoginSubmit, variant = "page" }: LoginProps) {
   //Add state to track input values
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -32,21 +34,18 @@ export default function Login({ onLoginSubmit }: LoginProps) {
     // setEmail('');
     // setPassword('');
   };
-
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <Card className="dark flex w-full max-w-sm">
+  
+  const content = (
+    <Card className="dark flex w-full max-w-sm">
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
+          <CardTitle>Enter Account Details</CardTitle>
+          {/* <CardDescription>
+            Eow to login to your accountnter your email bel
+          </CardDescription> */}
           <CardAction>
-            <Button variant="link">
-              <a href="/signup">
-              Sign Up
-              </a>
-            </Button>
+            {/* <Button variant="link">
+              <SignUpModal onSignUpSubmit={signUp} triggerText="Sign Up" />
+            </Button> */}
           </CardAction>
         </CardHeader>
         <CardContent>
@@ -91,14 +90,21 @@ export default function Login({ onLoginSubmit }: LoginProps) {
                   Login
                 </Button>
 
-                <Button type="button" variant="outline" className="w-full">
+                {/* <Button type="button" variant="outline" className="w-full">
                   <Link href="/pages/dashboard" className="w-full"> Login with Google </Link>
-                </Button>
+                </Button> 
+                */}
               </div>
             </div>
           </form>
         </CardContent>
       </Card>
+  );
+
+  if (variant === "modal") return content;
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-background">
+      {content}
     </div>
-  )
+  );
 }

@@ -67,8 +67,8 @@ export default function TeamPage() {
     const activeMembers = teamMembers.filter(m => m.status === 'active').length;
     const totalCompleted = teamMembers.reduce((sum, m) => sum + m.completed_tasks, 0);
     const totalInProgress = teamMembers.reduce((sum, m) => sum + m.in_progress_tasks, 0);
-    const avgPerformance = teamMembers.length > 0 
-        ? Math.round(teamMembers.reduce((sum, m) => sum + m.performance, 0) / teamMembers.length) 
+    const avgPerformance = teamMembers.length > 0
+        ? Math.round(teamMembers.reduce((sum, m) => sum + m.performance, 0) / teamMembers.length)
         : 0;
 
     const handleAddMember = async () => {

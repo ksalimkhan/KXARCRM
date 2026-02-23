@@ -17,14 +17,14 @@ import {
 import { GraphicDesign } from "@/app/pages/dashboard/types/graph";
 import { Medical } from "@/app/pages/dashboard/types/medical";
 
-const business_types = {
+const business_types: Record<"A" | "B", React.ReactNode> = {
   A: <GraphicDesign />,
   B: <Medical />,
 };
 
 export default function DashboardPage() {
 
-  const[activeType, setActiveType] = useState('A');
+  const[activeType, setActiveType] = useState<"A" | "B">('A');
 
   return (
 
@@ -32,13 +32,19 @@ export default function DashboardPage() {
 
     <div>
       <label htmlFor="bis_type">Buisness Type </label>
-      <select id="bis_type" className="bis_type">
-        <option value="Graphic Design" onClick = {() => setActiveType('A')}>Graphic Design</option>
-        <option value="Medical" onClick = {() => setActiveType('B')}>Medical</option>
+      <select 
+        id="bis_type" 
+        className="bis_type" 
+        value={activeType} 
+        onChange={(e) => setActiveType(e.target.value as "A" | "B")}>
+        <option value="A">Graphic Design</option>
+        <option value="B">Medical</option>
       </select>
     </div>
 
-    {business_types[activeType]}
+    <div key={activeType}>
+      {business_types[activeType]}
+    </div>
 
     </>
 
