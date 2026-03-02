@@ -4,7 +4,7 @@
 This is a method utulized throughout the project to fetch data from the supabase database. It is an async lamda functions and also includes error handling. 
 
 ## Signature/Endpoint
- const fetchData = async () => { ... };
+const fetchData = async () => { ... };
 
 ## Parameters
 The method declaration itself does not take in any parameters, but inside the method it receives table data from the supabase depending in what page file it is written. 
