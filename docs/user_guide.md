@@ -69,8 +69,8 @@ npm run dev
 ```
 
 ## Core Workflow Example
-#One of our core workflows is running the tests for the applicaiton
-#To run the tests simply type
+One of our core workflows is running the tests for the applicaiton
+To run the tests simply type
 ```shell
 npm test
 ```
