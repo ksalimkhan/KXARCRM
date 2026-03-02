@@ -11,8 +11,8 @@
 - [Installation](#-installation)
 
 ## About
-Project from KXARCRM for Comp 490/491\
-Custom, user friendly Customer Relations Management software\
+Project from KXARCRM for Comp 490/491
+Custom, user friendly Customer Relations Management software
 
 ## The Team
 - Kousha Salimkhan (@ksalimkhan)
