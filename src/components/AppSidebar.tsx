@@ -1,7 +1,7 @@
 import React from 'react'
 import { Calendar, Contact, Database, Home, Inbox, Link, Settings, Star } from "lucide-react"
 import Image from "next/image"
-import SignOut from "../app/pages/dashboard/signout";
+import SignOut from "../app/pages/database/signout";
 
 import {
   Sidebar,
@@ -22,6 +22,11 @@ const items = [
     icon: Home,
   },
   {
+    title: "Database",
+    url: "/pages/database",
+    icon: Database,
+  },
+  {
     title: "Tasks",
     url: "/pages/tasks",
     icon: Inbox,
@@ -31,11 +36,7 @@ const items = [
     url: "/pages/calendar",
     icon: Calendar,
   },
-  {
-    title: "Databases",
-    url: "#",
-    icon: Database,
-  },
+
   {
     title: "Contacts",
     url: "#",

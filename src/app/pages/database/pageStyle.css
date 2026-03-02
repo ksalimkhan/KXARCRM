@@ -21,14 +21,3 @@ body {
 h1 {padding: 1rem;}
 
 Link {padding: 1rem;}
-
-
-.infographics {
-    display: flex;
-    gap: 20px;
-}
-
-.projectsChart,
-.statisticsGraph {
-    flex: 1;
-}

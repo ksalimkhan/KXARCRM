@@ -1,6 +1,6 @@
 'use client';
 
-import "@/app/pages/dashboard/pageStyle.css";
+import "@/app/pages/database/pageStyle.css";
 import { Button } from "@/components/ui/button";
 import React, { useState } from 'react';
 
@@ -14,17 +14,13 @@ import {
   CardTitle
 } from "@/components/ui/card";
 
-import { ShowCustomers } from "@/app/pages/dashboard/tables/customers";
-import { ShowProjects } from "@/app/pages/dashboard/tables/projects";
-import { ShowPayments } from "@/app/pages/dashboard/tables/payments";
+import { ShowPatients } from "@/app/pages/database/tables/patients";
 
 const tables = {
-  A: <ShowCustomers />,
-  B: <ShowProjects />,
-  C: <ShowPayments />,
+  A: <ShowPatients />,
 };
 
-export function GraphicDesign() {
+export function Medical() {
 
   const[activeTable, setActiveTable] = useState('A');
 
@@ -34,9 +30,7 @@ export function GraphicDesign() {
         <CardHeader>
           <CardTitle>Dashboard</CardTitle>
           <div className="gap-4 flex">
-            <Button onClick={() => setActiveTable('A')}>Customers</Button>
-            <Button onClick={() => setActiveTable('B')}>Projects</Button>
-            <Button onClick={() => setActiveTable('C')}>Payments</Button>
+            <Button onClick={() => setActiveTable('A')}>Patients</Button>
           </div>
         </CardHeader>
 
