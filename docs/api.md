@@ -1,3 +1,29 @@
+# fetchData
+
+## What is it? 
+This is a method utulized throughout the project to fetch data from the supabase database. It is an async lamda functions and also includes error handling. 
+
+## Signature/Endpoint
+ const fetchData = async () => { ... };
+
+## Parameters
+The method declaration itself does not take in any parameters, but inside the method it receives table data from the supabase depending in what page file it is written. 
+
+## Return values
+The method does not return anything, but it does assign the returned table value from the supabase to the customers variable using react state hooks and by calling the setCustomers() or
+setProjects() or setPatments() method
+
+## Errors or Exceptions
+Within the method if there is any errors during the reteival process of the data fromsupabpase it displays an errors in the console.
+
+## Example
+When navigating to the database page of our application, eveery time the page loads, this method gets called to retreive the data from the database.
+
+## Other Notes
+The supabase api calls withing the method can be modifed to reteirve custom selection of data from tables
+for example supabase.from('customers').select(*); returns all the rows of the cutomer table
+but supabase.from('customers').select(*).eq('id', 2); will return the customer information with that id.
+
 # npm run dev
 
 ## What is it?
