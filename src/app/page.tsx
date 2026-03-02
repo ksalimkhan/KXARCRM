@@ -51,7 +51,7 @@ export default function LandingPage() {
       <main className={styles.container}>
         <section className={styles.hero}>
           <div>
-            <h1 className={styles.h1}>Run your CRM like a cockpit.</h1>
+            <h1 className={styles.h1}>Run your CRM like its a Control Panel!</h1>
             <p className={styles.sub}>
               KXARCRM helps you track customers, manage pipelines, and keep your team aligned —
               with a clean UI and fast workflows.
