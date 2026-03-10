@@ -14,9 +14,7 @@ export async function processData(
         email_address,
         phone_number,
         address,
-        last_contact: null,
         notes,
-        status: null
     });
 
     if(error) {
