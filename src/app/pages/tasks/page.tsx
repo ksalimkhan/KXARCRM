@@ -18,16 +18,22 @@ interface Task {
     id: number;
     title: string;
     description: string;
-    assignee: string;
     due_date: string;
     priority: 'low' | 'medium' | 'high';
     status: 'pending' | 'in-progress' | 'completed';
     customer_id: string;
+    assignee_id: number | null;
+}
+
+//Skeleton for TeamMember
+interface TeamMember {
+    id: number;
+    member_name: string;
 }
 
 
 export default function Tasks() {
-    //Pushes default Tasks to board
+    //Stores list of tasks displayed on the page
     const [tasks, setTasks] = useState<Task[]>([
         //Dummy Data for testing
         // { id: 1, title: 'Follow up with John Smith', description: 'Send proposal document', assignee: 'You', due_date: '2025-11-01', priority: 'high', status: 'pending', customer_id: 'Acme Corp' },
@@ -40,14 +46,15 @@ export default function Tasks() {
     const [newTask, setNewTask] = useState({
         title: '',
         description: '',
-        assignee: '',
         due_date: '',
         priority: 'medium' as const,
         status: 'pending' as const,
         customer_id: '',
+        assignee_id: '',
     });
 
-
+    //Holds list of all Team Members
+    const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'in-progress' | 'completed'>('all');
 
     //Can remove if not needed
@@ -63,12 +70,35 @@ export default function Tasks() {
         const matchPriority = priorityFilter === 'all' || task.priority === priorityFilter;
         return matchStatus && matchPriority;
     })
-    //Fetches tasks from Supabase and displays them
+
+    //Fetches tasks and teamMembers from Supabase and loads them
     useEffect(() => {
         fetchTasks();
+        fetchTeamMembers();
     }, []);
 
+    // Converts assignee_id into readable team member name to display on page
+    const getAssigneeName = (assigneeId: number | null) => {
+        if (assigneeId === null) return 'Unassigned';
+        const member = teamMembers.find((m) => m.id === assigneeId);
+        return member ? member.member_name : `User #${assigneeId}`;
+    };
 
+    //Fetches TeamMembers from team_members table 
+    const fetchTeamMembers = async () => {
+    const { data, error } = await supabase
+        .from('team_members')
+        .select('id, member_name')
+        .order('id', { ascending: true });
+
+        if (error) {
+            console.error('Error fetching team members:', error);
+        } else {
+            setTeamMembers(data || []);
+        }
+    };
+
+    //Fetches Task from Tasks table
     const fetchTasks = async () => {
         const {data, error } = await supabase
         .from('tasks')
@@ -96,7 +126,7 @@ export default function Tasks() {
         }
     };
 
-    //Based on case, shows corresponding color
+    //Returns badge color based on task status
     const getStatusColor = (status: string) => {
         switch (status) {
         case 'completed':
@@ -130,32 +160,22 @@ export default function Tasks() {
     };
 
     const handleAddTask = async () => {
-        const customerIdSent = newTask.customer_id === '' ? null : Number(newTask.customer_id);
         const{data, error} = await supabase
         .from('tasks')
         .insert([
-        // const task: Task = {
-        // id: tasks.length + 1,
-        // //Takes in whatever the user inputs and puts it in new Task
-        // ...newTask,
-        // };
-        // //Adds new task to task list
-        // setTasks([...tasks, task]);
-        // //Resets Form to Empty
-        // setNewTask({
         {
             title: newTask.title,
             description: newTask.description,
-            assignee: newTask.assignee,
+            assignee_id: newTask.assignee_id === '' ? null : Number(newTask.assignee_id),
             due_date: newTask.due_date,
             priority: newTask.priority,
             status: newTask.status,
             customer_id: newTask.customer_id,
         }
         ])
-        //Returns New Task into database
+        //Returns new inserted task from supabase
         .select()
-        //Popup diasappears
+        //Closes dialog after successful insert
         if(error) {
             console.error('Error adding task:', error);
             alert('Error adding task.' + error.message);
@@ -165,7 +185,7 @@ export default function Tasks() {
             setNewTask({
                 title: '',
                 description: '',
-                assignee: '',
+                assignee_id: '',
                 due_date: '',
                 priority: 'medium',
                 status: 'pending',
@@ -330,14 +350,24 @@ export default function Tasks() {
                             placeholder="Add task details..."
                         />
                         </div>
+                        {/* Drop Down of current Team Members on Teams Page */}
                         <div className="space-y-2">
-                        <Label htmlFor="task-assignee">Assignee</Label>
-                        <Input
-                            id="task-assignee"
-                            value={newTask.assignee}
-                            onChange={(e) => setNewTask({ ...newTask, assignee: e.target.value })}
-                            placeholder="You"
-                        />
+                            <Label htmlFor="task-assignee">Assignee</Label>
+                            <Select
+                                value={newTask.assignee_id}
+                                onValueChange={(value) => setNewTask({ ...newTask, assignee_id: value })}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select team member" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {teamMembers.map((member) => (
+                                        <SelectItem key={member.id} value={String(member.id)}>
+                                            {member.member_name}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
                         </div>
                         <div className="space-y-2">
                         <Label htmlFor="task-related">Related To</Label>
@@ -438,7 +468,7 @@ export default function Tasks() {
                     <div className="flex items-center gap-4 text-sm text-gray-600">
                         <div className="flex items-center gap-1">
                             <User className="w-4 h-4" />
-                            {task.assignee}
+                            {getAssigneeName(task.assignee_id)}
                         </div>
                         <div className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
