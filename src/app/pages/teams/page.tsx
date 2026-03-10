@@ -13,7 +13,7 @@ import { supabase } from '@/app/server/supabaseClient';
 
 interface TeamMember {
     id: number;
-    name: string;
+    member_name: string;
     role: string;
     initials: string;
     status: 'active' | 'inactive';
@@ -76,7 +76,7 @@ export default function TeamPage() {
             .from('team_members')
             .insert([
                 {
-                    name: newMember.member_name,
+                    member_name: newMember.member_name,
                     role: newMember.role,
                     initials: newMember.initials,
                     status: newMember.status,
