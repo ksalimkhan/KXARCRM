@@ -51,10 +51,9 @@ export default function LandingPage() {
       <main className={styles.container}>
         <section className={styles.hero}>
           <div>
-            <h1 className={styles.h1}>Run your CRM like its a Control Panel!</h1>
+            <h1 className={styles.h1}>The KXARCRM Experience</h1>
             <p className={styles.sub}>
-              KXARCRM helps you track customers, manage pipelines, and keep your team aligned —
-              with a clean UI and fast workflows.
+              KXARCRM helps you track customers, manage business pipelines, and keep your team aligned using intuitive UI and faster workflows.
             </p>
 
             <div className={styles.ctas}>
@@ -71,19 +70,19 @@ export default function LandingPage() {
               <div className={styles.card}>
                 <p className={styles.cardTitle}>Pipelines</p>
                 <p className={styles.cardText}>
-                  Move deals across stages with clarity and speed.
+                  Use pipelines to manage and track projects through different stages.
                 </p>
               </div>
               <div className={styles.card}>
                 <p className={styles.cardTitle}>Contacts</p>
                 <p className={styles.cardText}>
-                  Keep customer context in one place — notes, history, and status.
+                  Manage all your customer contacts.
                 </p>
               </div>
               <div className={styles.card}>
                 <p className={styles.cardTitle}>Insights</p>
                 <p className={styles.cardText}>
-                  Lightweight reporting to spot trends and stay on target.
+                  Grab information from your CRM data and infographics.
                 </p>
               </div>
             </div>
@@ -104,16 +103,16 @@ export default function LandingPage() {
         </section>
 
         <section id="pricing" style={{ marginTop: 28, opacity: 0.9 }}>
-          <h2 style={{ margin: "18px 0 8px" }}>Pricing (placeholder)</h2>
+          <h2 style={{ margin: "18px 0 8px" }}>Pricing</h2>
           <p style={{ color: "rgba(232, 238, 252, 0.75)", lineHeight: 1.6 }}>
-            We’ll fill this in later. For now, this section proves scrolling/nav anchors work.
+            Idk we will write something here later.
           </p>
         </section>
 
         <section id="contact" style={{ marginTop: 28, opacity: 0.9 }}>
-          <h2 style={{ margin: "18px 0 8px" }}>Contact (placeholder)</h2>
+          <h2 style={{ margin: "18px 0 8px" }}>Contact</h2>
           <p style={{ color: "rgba(232, 238, 252, 0.75)", lineHeight: 1.6 }}>
-            Add an email, demo request form, or link to your team later.
+            Idk we will write something here later.
           </p>
         </section>
       </main>
