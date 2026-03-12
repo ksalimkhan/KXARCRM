@@ -116,10 +116,6 @@ export default function LandingPage() {
           </p>
         </section>
       </main>
-
-      <footer className={styles.footer}>
-        © {new Date().getFullYear()} KXARCRM — All rights reserved.
-      </footer>
     </div>
   );
 }
