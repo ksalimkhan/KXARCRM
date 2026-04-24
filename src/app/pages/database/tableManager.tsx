@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
 import "@/app/pages/database/pageStyle.css";
 import { Button } from "@/components/ui/button";
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 import {
   Card,
@@ -11,7 +11,7 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "@/components/ui/card";
 
 import { ShowCustomers } from "@/app/pages/database/tables/customers";
@@ -24,10 +24,8 @@ const tables = {
   C: <ShowPayments />,
 };
 
-export function GraphicDesign() {
-
-  
-  const[activeTable, setActiveTable] = useState<'A' | 'B' | 'C'>('A');
+export function TableManager() {
+  const [activeTable, setActiveTable] = useState<"A" | "B" | "C">("A");
 
   return (
     <Card className="m-8 p-8">
@@ -36,29 +34,27 @@ export function GraphicDesign() {
           <CardTitle>Dashboard</CardTitle>
           <div className="gap-4 flex">
             <Button
-              variant={activeTable === 'A' ? 'default' : 'outline'}
-              onClick={() => setActiveTable('A')}
+              variant={activeTable === "A" ? "default" : "outline"}
+              onClick={() => setActiveTable("A")}
             >
               Customers
             </Button>
             <Button
-              variant={activeTable === 'B' ? 'default' : 'outline'}
-              onClick={() => setActiveTable('B')}
+              variant={activeTable === "B" ? "default" : "outline"}
+              onClick={() => setActiveTable("B")}
             >
               Projects
             </Button>
             <Button
-              variant={activeTable === 'C' ? 'default' : 'outline'}
-              onClick={() => setActiveTable('C')}
+              variant={activeTable === "C" ? "default" : "outline"}
+              onClick={() => setActiveTable("C")}
             >
               Payments
             </Button>
           </div>
         </CardHeader>
 
-        <CardContent>
-          {tables[activeTable]}
-        </CardContent>
+        <CardContent>{tables[activeTable]}</CardContent>
       </div>
     </Card>
   );
