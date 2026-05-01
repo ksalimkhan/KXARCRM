@@ -22,13 +22,8 @@ h1 {padding: 1rem;}
 
 Link {padding: 1rem;}
 
-
 .infographics {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 800px);
     gap: 20px;
-}
-
-.projectsChart,
-.statisticsGraph {
-    flex: 1;
 }

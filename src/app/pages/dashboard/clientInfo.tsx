@@ -15,7 +15,6 @@ import {
 import { useEffect, useState } from 'react';
 import { supabase } from '@/app/server/supabaseClient';
 
-// Register the required Chart.js components
 ChartJS.register(BarElement, Tooltip, Legend, Title, CategoryScale, LinearScale);
 
 type Project = {
@@ -26,87 +25,71 @@ type Customer = {
   customer_id: number;
 };
 
-type Payment = {
-  payment_id: number;
+type Profile = {
+  id: string;
 };
 
-type Task = {
-  id: number;
-};
+export default function ClientInfo() {
 
-export default function BarChart() {
-
-  const[projects, setProjects] = useState<Project[]>([]);
   const[customers, setCustomers] = useState<Customer[]>([]);
-  const[payments, setPayments] = useState<Payment[]>([]);
-  const[tasks, setTasks] = useState<Task[]>([]);
+  const[incompleteProjects, setIncompleteProjects] = useState<Project[]>([]);
+  const[teamMembers, setTeamMembers] = useState<Profile[]>([]);
 
   useEffect(() => {
-      fetchProjects();
       fetchCustomers();
-      fetchPayments();
-      fetchTasks();
+      fetchIncompleteProjects();
+      fetchTeamMembers();
   }, []);
 
-  const fetchProjects = async () =>
-  {
-    const { data, error } = await supabase
-      .from('projects')
-      .select("*")
-
-    if (error) {console.error('Error fetching data:', error);}
-    else { setProjects(data || []);}
-  };
 
   const fetchCustomers = async () =>
   {
     const { data, error } = await supabase
-      .from('customers')
-      .select("*")
+    .from('customers')
+    .select("*")
 
     if (error) {console.error('Error fetching data:', error);}
     else { setCustomers(data || []);}
   };
 
-  const fetchPayments = async () =>
+  const fetchIncompleteProjects = async () =>
   {
     const { data, error } = await supabase
-      .from('payments')
-      .select("*")
+    .from('projects')
+    .select("*")
+    .eq('status', 'In Progress');
 
     if (error) {console.error('Error fetching data:', error);}
-    else { setPayments(data || []);}
+    else { setIncompleteProjects(data || []);}
   };
 
-  const fetchTasks = async () =>
+  const fetchTeamMembers = async () =>
   {
     const { data, error } = await supabase
-      .from('tasks')
-      .select("*")
+    .from('profiles')
+    .select("*")
 
     if (error) {console.error('Error fetching data:', error);}
-    else { setTasks(data || []);}
+    else { setTeamMembers(data || []);}
   };
 
   const data = {
-    labels: ['Projects', 'Customers', 'Payments', 'Tasks'],
+    labels: ['Clients', 'Incomplete Projects', 'Team Members'],
     datasets: [
       {
         label: 'Number',
-        data: [projects.length, customers.length, payments.length, tasks.length],
+        data: [customers.length, incompleteProjects.length, teamMembers.length],
         backgroundColor: [
-          '#20afdb',
-          '#19e046',
-          '#e31ce4',
-          '#8a38ed',
+          '#00FFFF',
+          '#B36AC0',
+          '#1CFF18',
         ],
         borderColor: [
-          '#0f7391',
-          '#0d8127',
-          '#910f91',
-          '#5e1bae',
+          '#019e9e',
+          '#834A8D',
+          '#029100',
         ],
-        borderWidth: 2,
+        borderWidth: 4,
       },
     ],
   };
@@ -115,11 +98,11 @@ export default function BarChart() {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top' as const,
+        display: false,
       },
       title: {
         display: true,
-        text: 'Database Statistics',
+        text: 'Project Management Statistics',
       },
     },
     scales: {
@@ -130,8 +113,8 @@ export default function BarChart() {
   };
 
   return (
-    <div style={{ width: '800px', height: '800px' }}>
-        <Bar data={data} options={options} />
+    <div style={{ width: '800px', height: '400px' }}>
+      <Bar data={data} options={options} />
     </div>
   );
 }

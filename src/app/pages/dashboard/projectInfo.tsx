@@ -14,11 +14,9 @@ import {
 import { useEffect, useState } from 'react';
 import { supabase } from '@/app/server/supabaseClient';
 
-// Register the required Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
-
-export default function PieChart() {
+export default function ProjectInfo() {
 
   const[completedProjects, setCompletedProjects] = useState(0);
   const[totalProjects, setTotalProjects] = useState(0);
@@ -83,7 +81,7 @@ export default function PieChart() {
   };
 
   return (
-    <div style={{width: '400px', height: '400px'}}>
+    <div style={{width: '800px', height: '400px'}}>
       <Pie data={data} options={options} />
     </div>
   );

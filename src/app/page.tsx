@@ -85,9 +85,9 @@ export default function LandingPage() {
 
             <div id="features" className={styles.cardGrid}>
               <div className={styles.card}>
-                <p className={styles.cardTitle}>Pipelines</p>
+                <p className={styles.cardTitle}>Infographics</p>
                 <p className={styles.cardText}>
-                  Use pipelines to manage and track projects through different stages.
+                  Use infographics to track projects through different stages.
                 </p>
               </div>
               <div className={styles.card}>
@@ -122,14 +122,14 @@ export default function LandingPage() {
         <section id="pricing" style={{ marginTop: 28, opacity: 0.9 }}>
           <h2 style={{ margin: "18px 0 8px" }}>Pricing</h2>
           <p style={{ color: "rgba(232, 238, 252, 0.75)", lineHeight: 1.6 }}>
-            Idk we will write something here later.
+            Custom pricing model, contact for more information.
           </p>
         </section>
 
         <section id="contact" style={{ marginTop: 28, opacity: 0.9 }}>
           <h2 style={{ margin: "18px 0 8px" }}>Contact</h2>
           <p style={{ color: "rgba(232, 238, 252, 0.75)", lineHeight: 1.6 }}>
-            Idk we will write something here later.
+            Contact us at kxarteam@kxar.com
           </p>
         </section>
       </main>

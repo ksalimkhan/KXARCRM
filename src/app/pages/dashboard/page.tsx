@@ -1,8 +1,10 @@
 'use client';
 
 import "./pageStyle.css";
-import PieChart from "@/app/pages/dashboard/piechart";
-import BarChart from "@/app/pages/dashboard/bargraph";
+import ProjectInfo from "@/app/pages/dashboard/projectInfo";
+import DatabaseInfo from "@/app/pages/dashboard/databaseInfo";
+import ClientInfo from "@/app/pages/dashboard/clientInfo";
+import TaskInfo from "@/app/pages/dashboard/taskInfo";
 
 export default function DashboardPage() {
 
@@ -10,8 +12,10 @@ export default function DashboardPage() {
 
     <>
     <div className='infographics'>
-        <PieChart />
-        <BarChart />
+        <ProjectInfo className="gridItem"/>
+        <DatabaseInfo className="gridItem"/>
+        <ClientInfo className="gridItem"/>
+        <TaskInfo className="gridItem"/>
     </div>
     </>
 
