@@ -1,8 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import "./tableStyle.css";
 import { supabase } from '@/app/server/supabaseClient';
+
+import AddPaymentEntry from "./addPaymentEntry";
+import RemovePaymentEntry from "./removePaymentEntry";
+
+import "./tableStyle.css";
 
 type Payment = {
   payment_id: number;
@@ -49,6 +53,14 @@ export function ShowPayments () {
                     ))}
                 </tbody>
             </table>
+
+            <div className="modifier">
+            <AddPaymentEntry />
+            </div>
+
+            <div className="modifier">
+            <RemovePaymentEntry />
+            </div>
         </div>
     );
 }

@@ -1,13 +1,43 @@
 'use client';
 
-import { processData } from "@/app/server/processData";
+import {supabase} from "@/app/server/supabaseClient"
 
 import type { MouseEvent } from "react";
 
 import { Button } from "@/components/ui/button";
 import "./tableStyle.css";
 
-export default function AddEntry() {
+export default function AddCustomerEntry() {
+
+  const processData = async(
+    first_name: string,
+    last_name: string,
+    email_address: string,
+    phone_number: string,
+    address: string,
+    notes: string,
+  ) => {
+    const {data: { user }, error: userError,} = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      console.error("No signed-in user found:", userError?.message);
+      return {error: userError, data: null};
+    }
+    const {data, error} = await supabase.from("customers").insert({
+      first_name,
+      last_name,
+      email_address,
+      phone_number,
+      address,
+      notes,
+    });
+
+    if(error) {console.error("Error inserting a customer:", error.message, error.details, error.hint);}
+    else {console.log("Customer added:", data);}
+
+    return {error, data};
+  }
+
   const addEntry = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -24,7 +54,7 @@ export default function AddEntry() {
       email_address,
       phone_number,
       address,
-      notes
+      notes,
     );
 
     location.reload();

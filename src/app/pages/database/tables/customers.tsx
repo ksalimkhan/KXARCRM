@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import AddEntry from "./addEntry";
-import RemoveEntry from "./removeEntry";
-import "./tableStyle.css";
 import { supabase } from '@/app/server/supabaseClient';
+
+import AddCustomerEntry from "./addCustomerEntry";
+import RemoveCustomerEntry from "./removeCustomerEntry";
+
+import "./tableStyle.css";
 
 interface Customer {
     id: number;
@@ -13,9 +15,7 @@ interface Customer {
     email_address: string | null;
     phone_number: string | null;
     address: string | null;
-    last_contact: string | null;
     notes: string | null;
-    user_id: string;
 }
 
 export function ShowCustomers () {
@@ -59,7 +59,6 @@ export function ShowCustomers () {
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>Address</th>
-                    <th>Last Contact</th>
                     <th>Notes</th>
                 </tr>
                 </thead>
@@ -72,7 +71,6 @@ export function ShowCustomers () {
                         <td>{customer.email_address}</td>
                         <td>{customer.phone_number}</td>
                         <td>{customer.address}</td>
-                        <td>{customer.last_contact}</td>
                         <td>{customer.notes}</td>
                         </tr>
                     ))}
@@ -80,11 +78,11 @@ export function ShowCustomers () {
             </table>
 
             <div className="modifier">
-                <AddEntry />
+                <AddCustomerEntry />
             </div>
 
             <div className="modifier">
-                <RemoveEntry />
+                <RemoveCustomerEntry />
             </div>
         </div>
     );

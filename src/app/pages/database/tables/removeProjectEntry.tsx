@@ -1,29 +1,29 @@
 'use client';
 
 import {supabase} from "@/app/server/supabaseClient"
-import { processData } from "@/app/server/processData";
 
 import type { MouseEvent } from "react";
 
 import { Button } from "@/components/ui/button";
 import "./tableStyle.css";
 
-export default function RemoveEntry() {
+export default function RemoveProjectEntry() {
   const removeEntry = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    const customer_id = (document.getElementById("customer_id") as HTMLInputElement).value;
+    const project_id = (document.getElementById("project_id") as HTMLInputElement).value;
 
-    const { error } = await supabase.from('customers').delete().eq('id', customer_id);
+    const { error } = await supabase.from('projects').delete().eq('project_id', project_id);
 
-    if(error) {console.error('Error Removing An Entry');}
+    if(error) {console.error("Error Removing A Project Entry:", error.message, error.details, error.hint);}
 
     location.reload();
+
   };
 
   return (
     <>
-      <input id="customer_id" placeholder="Customer ID" />
+      <input id="project_id" placeholder="Project ID" />
       <Button onClick={removeEntry}>Remove Entry</Button>
     </>
   );

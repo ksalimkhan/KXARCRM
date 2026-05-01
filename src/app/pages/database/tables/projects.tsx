@@ -1,13 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import "./tableStyle.css";
 import { supabase } from '@/app/server/supabaseClient';
+
+import AddProjectEntry from "./addProjectEntry";
+import RemoveProjectEntry from "./removeProjectEntry";
+
+import "./tableStyle.css";
 
 type Project = {
   project_id: number;
   customer_id: number;
-  type: string;
+  project_type: string;
   notes: string;
   status: string;
   due_date: string;
@@ -25,7 +29,7 @@ export function ShowProjects () {
         const {data, error } = await supabase.from('projects').select('*');
 
         if (error) {
-            console.error('Error fetching customers: ', error);
+            console.error('Error fetching projects: ', error);
         }
         else {
             setProjects(data || []);
@@ -51,7 +55,7 @@ export function ShowProjects () {
                         <tr key={project.project_id}>
                             <td>{project.project_id}</td>
                             <td>{project.customer_id}</td>
-                            <td>{project.type}</td>
+                            <td>{project.project_type}</td>
                             <td>{project.notes}</td>
                             <td>{project.status}</td>
                             <td>{project.due_date}</td>
@@ -59,6 +63,14 @@ export function ShowProjects () {
                     ))}
                 </tbody>
             </table>
+
+            <div className="modifier">
+            <AddProjectEntry />
+            </div>
+
+            <div className="modifier">
+            <RemoveProjectEntry />
+            </div>
         </div>
     );
 }
