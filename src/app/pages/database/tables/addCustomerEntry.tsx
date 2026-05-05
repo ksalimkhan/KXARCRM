@@ -48,7 +48,12 @@ export default function AddCustomerEntry() {
     const address = (document.getElementById("new_address") as HTMLInputElement).value;
     const notes = (document.getElementById("new_notes") as HTMLInputElement).value;
 
-    await processData(
+    if (!first_name || !last_name || !email_address) {
+      alert("Please fill out first name, last name, and email.");
+      return;
+    }
+
+    const result = await processData(
       first_name,
       last_name,
       email_address,
@@ -57,17 +62,19 @@ export default function AddCustomerEntry() {
       notes,
     );
 
+    if (result.error) return;
+    
     location.reload();
   };
 
   return (
     <>
-      <input id="new_first_name" placeholder="First Name" />
-      <input id="new_last_name" placeholder="Last Name" />
-      <input id="new_email_address" placeholder="Email Address" />
-      <input id="new_phone_number" placeholder="Phone Number" />
-      <input id="new_address" placeholder="Address" />
-      <input id="new_notes" placeholder="Notes" />
+      <input id="new_first_name" placeholder="First Name" className="m-5 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"/>
+      <input id="new_last_name" placeholder="Last Name" className="m-5 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"/>
+      <input id="new_email_address" placeholder="Email Address" className="m-5 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"/>
+      <input id="new_phone_number" placeholder="Phone Number" className="m-5 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"/>
+      <input id="new_address" placeholder="Address" className="m-5 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"/>
+      <input id="new_notes" placeholder="Notes" className="m-5 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"/>
       <Button onClick={addEntry}>Add Entry</Button>
     </>
   );
