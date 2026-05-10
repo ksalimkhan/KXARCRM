@@ -16,6 +16,6 @@ Custom, user friendly Customer Relations Management software
 - Russell de Vries (@Bashiho)
 
 ## Installation
-[Localhost Installation and Setup instructions](./docs/api.md)
+[Localhost Installation and Setup instructions](./docs/setup.md)
 
 [Vercel Deployment Instructions](https://vercel.com/docs/git/vercel-for-github)
