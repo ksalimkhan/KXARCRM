@@ -27,3 +27,7 @@ Link {padding: 1rem;}
     grid-template-columns: repeat(2, 800px);
     gap: 20px;
 }
+
+.gridItem {
+  width: 100%;
+}

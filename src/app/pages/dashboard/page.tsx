@@ -12,10 +12,10 @@ export default function DashboardPage() {
 
     <>
     <div className='infographics'>
-        <ProjectInfo className="gridItem"/>
-        <DatabaseInfo className="gridItem"/>
-        <ClientInfo className="gridItem"/>
-        <TaskInfo className="gridItem"/>
+        <ProjectInfo/>
+        <DatabaseInfo/>
+        <ClientInfo/>
+        <TaskInfo/>
     </div>
     </>
 
